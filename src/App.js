@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, NavLink} from 'react-router-dom';
+import SignUpForm from './components/SignUpForm';
+import SignInForm from './components/SignInForm';
+import Logo from './logo.png';
 import './App.css';
 
-function App() {
-  return (
+class App extends Component {
+  render() {
+    return (
+    <Router>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="App__Aside">
+        <img className="centerLogo" src={Logo} height="300" width="500"/>
+      </div>
+      <div className="App__Form">
+
+        <div className="PageSwitcher">
+          <NavLink exact to="/" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sign In</NavLink>
+          <NavLink to="/sign-up" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sign Up</NavLink>
+        </div>
+
+        <div className="FormTitle">
+          <NavLink exact to="/" activeClassName="FormTitle__Link--Active" className="FormTitle__Link"> Sign In</NavLink> or 
+          <NavLink to="/sign-up" activeClassName="FormTitle__Link--Active" className="FormTitle__Link"> Sign Up</NavLink>
+        </div>
+
+        <Route path="/sign-up" component={SignUpForm}>
+        </Route>
+        
+        <Route exact path="/" component={SignInForm}>
+        </Route>
+      </div>
     </div>
+    </Router>
   );
+}
 }
 
 export default App;
