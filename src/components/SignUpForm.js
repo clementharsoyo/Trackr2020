@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 class SignUpForm extends Component {
     
     state = {
         username: '',
         password: '',
+        isPasswordShown: false,
         email: ''
     };
     
@@ -30,41 +33,52 @@ class SignUpForm extends Component {
         })
     }
 
+    togglePasswordVisiblity = () => {
+        const { isPasswordShown } = this.state;
+        this.setState({ isPasswordShown: !isPasswordShown });
+      };
+
     render() {
         return(
             <div className="FormCenter">
-                    <form onSubmit={this.handleSubmit} className="FormFields" onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit} className="FormFields" onSubmit={this.handleSubmit}>
                         
-                        {/* for Username */}
-                        <div className="FormField">
+                    {/* for Username */}
+                    <div className="FormField">
                         <label className="FormField__Label" htmlFor="username">Username</label>
-                        <input type="text" id="name" className="FormField__Input" 
-                            placeholder="Enter your new username" name="username" 
+                        <input type="text" id="username" className="FormField__Input" 
+                            placeholder="Enter your new username" name="username" autoComplete="off"
                             value={this.state.username} onChange={this.handleChange}/>
-                        </div>
+                    </div>
 
-                        {/* for Password */}
-                        <div className="FormField">
+                    {/* for Password */}
+                    <div className="FormField">
                         <label className="FormField__Label" htmlFor="password">Password</label>
-                        <input type="text" id="password" className="FormField__Input" 
-                            placeholder="Enter your new password" name="password"
+                        <input type={this.state.isPasswordShown ? "text" : "password"} id="password" className="FormField__Input" 
+                            placeholder="Enter your new password" name="password" autoComplete="off"
                             value={this.state.password} onChange={this.handleChange}/>
-                        </div>
+                        <i>
+                            <FontAwesomeIcon icon={this.state.isPasswordShown ? faEyeSlash : faEye} className="password-icon" 
+                                onClick={this.togglePasswordVisiblity}
+                            />
+                        </i>
+                    </div>
 
-                        {/* for Email */}
-                        <div className="FormField">
+                    {/* for Email */}
+                    <div className="FormField">
                         <label className="FormField__Label" htmlFor="email">Email Address</label>
                         <input type="text" id="email" className="FormField__Input" 
-                            placeholder="Enter your email address" name="email" 
+                            placeholder="Enter your email address" name="email" autoComplete="off"
                             value={this.state.email} onChange={this.handleChange}/>
-                        </div>
+                    </div>
 
-                        {/* Sign Up Button */}
-                        <div className="FormField">
+                    {/* Sign Up Button */}
+                    <div className="FormField">
                         <button className="FormField__Button mr-20">Sign Up</button>
                         <Link to="/" className="FormField__Link">Have an account?</Link>
-                        </div>
-                    </form>
+                    </div>
+                    
+                </form>
             </div>
         )
     }
