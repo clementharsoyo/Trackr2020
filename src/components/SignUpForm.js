@@ -74,7 +74,7 @@ class SignUpForm extends Component {
 
                     {/* Sign Up Button */}
                     <div className="FormField">
-                        <button className="FormField__Button mr-20">Sign Up</button>
+                        <button className="FormField__Button mr-20" onClick={this.props.changeState}>Sign Up</button>
                         <Link to="/" className="FormField__Link">Have an account?</Link>
                     </div>
                     

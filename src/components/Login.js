@@ -26,13 +26,11 @@ class Login extends Component {
             <NavLink to="/sign-up" activeClassName="FormTitle__Link--Active" className="FormTitle__Link"> Sign Up</NavLink>
           </div>
   
-          <Route path="/sign-up" component={SignUpForm}>
+          <Route path="/sign-up" render={(props) => <SignUpForm {...props} changeState = {this.props.changeState} />}>
           </Route>
           
-          <Route exact path="/" component={SignInForm}>
+          <Route exact path="/" render={(props) => <SignInForm {...props} changeState = {this.props.changeState} />}>
           </Route>
-
-          <a className="waves-effect waves-light btn-small" onClick={this.props.changeState}> Log In </a>
 
         </div>
       </div>
