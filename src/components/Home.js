@@ -12,7 +12,7 @@ class Home extends Component {
       <Router>
         <div>
           <Navbar changeState={this.props.changeState}/>
-          <Route exact path="/homepage" component={Homepage}/>
+          <Route exact path="/" component={Homepage}/>
           <Route path="/dashboard" component={Dashboard}/>
           <Route path="/about" component={About}/>
         </div>
