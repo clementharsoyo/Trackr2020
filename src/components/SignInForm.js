@@ -63,7 +63,7 @@ class SignInForm extends Component {
 
                     {/* Sign In Button */}
                     <div className="FormField">
-                        <button className="FormField__Button mr-20" onClick={this.props.changeState}>Sign In</button>
+                        <button className="FormField__Button waves-effect waves-light mr-20" onClick={this.props.changeState}>Sign In</button>
                         <Link to="/sign-up" className="FormField__Link">New to Trackr?</Link>
                         </div>
                 </form>
