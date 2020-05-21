@@ -12,7 +12,7 @@ class Login extends Component {
       <Router>
       <div className="App">
         <div className="App__Aside">
-          <img className="centerLogo" src={Logo} height="300" width="500"/>
+          <img className="centerLogo" src={Logo} height="375" width="500"/>
         </div>
         <div className="App__Form">
   
