@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Navbar from './Navbar'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Dashboard from './Dashboard'
-import About from './About'
+import Activity from './Activity'
 import Homepage from './Homepage'
 import './Home.css'
 
@@ -14,7 +14,7 @@ class Home extends Component {
           <Navbar changeState={this.props.changeState}/>
           <Route exact path="/" component={Homepage}/>
           <Route path="/dashboard" component={Dashboard}/>
-          <Route path="/about" component={About}/>
+          <Route path="/activity" component={Activity}/>
         </div>
       </Router>
     );

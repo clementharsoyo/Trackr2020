@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, NavLink} from 'react-router-dom';
 import SignUpForm from './SignUpForm';
 import SignInForm from './SignInForm';
-import Logo from '../logo.png';
-import '../App.css';
+import Logo from './logo.png';
+import '../../App.css';
 
 class Login extends Component {
 

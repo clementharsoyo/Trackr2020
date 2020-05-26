@@ -39,7 +39,7 @@ class SignInForm extends Component {
     render() {
         return(
             <div className="FormCenter">
-                <form onSubmit={this.handleSubmit} className="FormFields" onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit} className="FormFields">
                         
                     {/* for Username */}
                     <div className="FormField">
