@@ -33,7 +33,7 @@ class SignInForm extends Component {
         console.log(userData)
         login(userData).then(res => {
             if (res) {
-                this.props.changeState
+                this.props.history.push('/signup')
             }
         })
     }

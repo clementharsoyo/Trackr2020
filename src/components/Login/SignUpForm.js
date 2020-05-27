@@ -29,7 +29,7 @@ class SignUpForm extends Component {
         e.preventDefault();
         console.log('Form submitted with these data: ')
         console.log(this.state)
-        const userData = {
+        const newUser = {
             username: this.state.username,
             password: this.state.password,
             email: this.state.email
