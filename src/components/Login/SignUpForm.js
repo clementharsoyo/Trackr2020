@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Register, register } from '../UserFunctions.js'
+import { register } from '../UserFunctions.js'
 
 class SignUpForm extends Component {
     
@@ -11,7 +11,6 @@ class SignUpForm extends Component {
         password: '',
         isPasswordShown: false,
         email: '',
-        successful: false,
         errors: {}
     };
     
@@ -34,7 +33,8 @@ class SignUpForm extends Component {
             password: this.state.password,
             email: this.state.email
         }
-        register(newUser).then(res => {
+        console.log(newUser)
+        register(newUser).then(response => {
             this.props.history.push('/')
         })
     }
@@ -44,15 +44,7 @@ class SignUpForm extends Component {
         this.setState({ isPasswordShown: !isPasswordShown });
       };
     
-    regis = () => {
-        if (this.state.successful) {
-            alert("success")
-        } else {
-            alert("fail");
-        }
-    }
     render() {
-        const { errors } = this.state;
         return(
             <div className="FormCenter">
                 <form onSubmit={this.handleSubmit} className="FormFields">
@@ -63,7 +55,6 @@ class SignUpForm extends Component {
                         <input type="text" id="username" className="FormField__Input" 
                             placeholder="Enter your new username" name="username" autoComplete="off"
                             value={this.state.username} onChange={this.handleChange}
-                            error={errors.username}
                             />
                     </div>
 
@@ -73,7 +64,6 @@ class SignUpForm extends Component {
                         <input type={this.state.isPasswordShown ? "text" : "password"} id="password" className="FormField__Input" 
                             placeholder="Enter your new password" name="password" autoComplete="off"
                             value={this.state.password} onChange={this.handleChange}
-                            error={errors.password}
                             />
                         <i>
                             <FontAwesomeIcon icon={this.state.isPasswordShown ? faEyeSlash : faEye} className="password-icon" 
@@ -88,7 +78,6 @@ class SignUpForm extends Component {
                         <input type="text" id="email" className="FormField__Input" 
                             placeholder="Enter your email address" name="email" autoComplete="off"
                             value={this.state.email} onChange={this.handleChange}
-                            error={errors.email}
                             />
                     </div>
 

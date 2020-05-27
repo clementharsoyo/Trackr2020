@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Login, login } from "../UserFunctions.js"
+import { login } from "../UserFunctions.js"
 
 class SignInForm extends Component {
     
@@ -33,7 +33,7 @@ class SignInForm extends Component {
         console.log(userData)
         login(userData).then(res => {
             if (res) {
-                this.props.history.push('/signup')
+                console.log('Login Successful')
             }
         })
     }
@@ -75,7 +75,7 @@ class SignInForm extends Component {
 
                     {/* Sign In Button */}
                     <div className="FormField">
-                        <button className="FormField__Button waves-effect waves-light mr-20" type="Submit">Sign In</button>
+                        <button className="FormField__Button waves-effect waves-light mr-20" type="Submit" onClick={this.changeState}>Sign In</button>
                         <Link to="/sign-up" className="FormField__Link">New to Trackr?</Link>
                         </div>
                 </form>

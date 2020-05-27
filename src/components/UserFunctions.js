@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const register = (newUser) => {
     return axios
-        .post("https://localhost:5000/routes/users/" + "signup", { 
+        .post("http://localhost:5000/api/users/" + "signup", { 
             username: newUser.username,
             password: newUser.password,
             email: newUser.email
@@ -14,7 +14,7 @@ export const register = (newUser) => {
 
 export const login = (user) => {
     return axios
-        .post("https://localhost:5000/routes/users/" + "signin", {
+        .post("http://localhost:5000/api/users/" + "signin", {
             username: user.username,
             password: user.password
         })
