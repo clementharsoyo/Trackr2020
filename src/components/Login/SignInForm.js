@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Login, login } from "../UserFunctions.js"
 
 class SignInForm extends Component {
     
     state = {
         username: '',
         password: '',
-        isPasswordShown: false
+        isPasswordShown: false,
+        errors: {}
     };
     
     handleChange = (e) => {
@@ -24,10 +26,15 @@ class SignInForm extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         console.log('Form submitted with these data: ')
-        console.log(this.state)
-        this.setState({
-            username: '',
-            password: ''
+        const userData = {
+            username: this.state.username,
+            password: this.state.password
+        }
+        console.log(userData)
+        login(userData).then(res => {
+            if (res) {
+                this.props.changeState
+            }
         })
     }
 
@@ -37,6 +44,7 @@ class SignInForm extends Component {
       };
     
     render() {
+        const { errors } = this.state;
         return(
             <div className="FormCenter">
                 <form onSubmit={this.handleSubmit} className="FormFields">
@@ -46,14 +54,18 @@ class SignInForm extends Component {
                         <label className="FormField__Label" htmlFor="username">Username</label>
                         <input type="text" id="username" className="FormField__Input" 
                             placeholder="Enter your username" name="username" autoComplete="off"
-                            value={this.state.username} onChange={this.handleChange}/>
+                            value={this.state.username} onChange={this.handleChange}
+                            error={errors.username}
+                            />
                     </div>
 
                     {/* for Password */}
                     <div className="FormField">
                         <label className="FormField__Label" htmlFor="password">Password</label>                            <input type={this.state.isPasswordShown ? "text" : "password"} id="password" className="FormField__Input" 
                             placeholder="Enter your password" name="password" autoComplete="off"
-                            value={this.state.password} onChange={this.handleChange}/>
+                            value={this.state.password} onChange={this.handleChange}
+                            error={errors.password}
+                            />
                         <i>
                             <FontAwesomeIcon icon={this.state.isPasswordShown ? faEyeSlash : faEye} className="password-icon" 
                                 onClick={this.togglePasswordVisiblity}
@@ -63,7 +75,7 @@ class SignInForm extends Component {
 
                     {/* Sign In Button */}
                     <div className="FormField">
-                        <button className="FormField__Button waves-effect waves-light mr-20" onClick={this.props.changeState}>Sign In</button>
+                        <button className="FormField__Button waves-effect waves-light mr-20" type="Submit">Sign In</button>
                         <Link to="/sign-up" className="FormField__Link">New to Trackr?</Link>
                         </div>
                 </form>
