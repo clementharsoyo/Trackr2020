@@ -10,9 +10,10 @@ class SignInForm extends Component {
         username: '',
         password: '',
         isPasswordShown: false,
-        errors: {}
     };
     
+    /* When filling the form, will update the state to accept 
+        user input */
     handleChange = (e) => {
         let target = e.target;
         let value = target.value;
@@ -23,6 +24,8 @@ class SignInForm extends Component {
         })
     }
 
+    /* When submit, will perform login if the username and password match,
+        hence navigate to homepage */
     handleSubmit = (e) => {
         e.preventDefault();
         console.log('Form submitted with these data: ')
@@ -31,13 +34,17 @@ class SignInForm extends Component {
             password: this.state.password
         }
         console.log(userData)
-        login(userData).then(res => {
+        login(userData)
+        .then(res => {
             if (res) {
-                console.log('Login Successful')
-            }
+            console.log('Login Successful')
+            this.props.history.push("/")
+            } 
         })
     }
 
+    /* When enabled, password will be displayed either as text
+        or hidden */
     togglePasswordVisiblity = () => {
         const { isPasswordShown } = this.state;
         this.setState({ isPasswordShown: !isPasswordShown });
@@ -49,22 +56,20 @@ class SignInForm extends Component {
             <div className="FormCenter">
                 <form onSubmit={this.handleSubmit} className="FormFields">
                         
-                    {/* for Username */}
+                    {/* Section for username */}
                     <div className="FormField">
                         <label className="FormField__Label" htmlFor="username">Username</label>
                         <input type="text" id="username" className="FormField__Input" 
                             placeholder="Enter your username" name="username" autoComplete="off"
                             value={this.state.username} onChange={this.handleChange}
-                            error={errors.username}
                             />
                     </div>
 
-                    {/* for Password */}
+                    {/* Section for password */}
                     <div className="FormField">
                         <label className="FormField__Label" htmlFor="password">Password</label>                            <input type={this.state.isPasswordShown ? "text" : "password"} id="password" className="FormField__Input" 
                             placeholder="Enter your password" name="password" autoComplete="off"
                             value={this.state.password} onChange={this.handleChange}
-                            error={errors.password}
                             />
                         <i>
                             <FontAwesomeIcon icon={this.state.isPasswordShown ? faEyeSlash : faEye} className="password-icon" 
@@ -75,13 +80,14 @@ class SignInForm extends Component {
 
                     {/* Sign In Button */}
                     <div className="FormField">
-                        <button className="FormField__Button waves-effect waves-light mr-20" type="Submit" onClick={this.changeState}>Sign In</button>
-                        <Link to="/sign-up" className="FormField__Link">New to Trackr?</Link>
+                        <button className="FormField__Button waves-effect waves-light mr-20" type="Submit" /* onClick={this.changeState} */>Sign In</button>
+                        <Link to="/login/signup" className="FormField__Link">New to Trackr?</Link>
                         </div>
                 </form>
             </div>
         )
     }
 }
+
 
 export default SignInForm

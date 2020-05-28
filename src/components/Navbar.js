@@ -10,7 +10,7 @@ const Navbar = (props) => {
           <li><Link to="/">Homepage</Link></li>
           <li><Link to="/dashboard">Dashboard</Link></li>
           <li><Link to="/activity">Activity</Link></li>
-          <li><Link to="/" className="waves-effect waves-light btn-small" onClick={props.changeState}>Go To LogIn Page</Link></li>
+          <li><Link to="/login" className="waves-effect waves-light btn-small">Go To Login Page</Link></li>
         </ul>
       </div>
     </nav> 

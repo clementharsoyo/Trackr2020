@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, NavLink} from 'react-router-dom';
+import { Switch, Route, NavLink } from 'react-router-dom';
 import SignUpForm from './SignUpForm';
 import SignInForm from './SignInForm';
 import Logo from './logo.png';
@@ -9,7 +9,7 @@ class Login extends Component {
 
     render() {
       return (
-      <Router>
+      <Switch>
       <div className="App">
         <div className="App__Aside">
           <img className="centerLogo" src={Logo} height="375" width="500"/>
@@ -17,24 +17,24 @@ class Login extends Component {
         <div className="App__Form">
   
           <div className="PageSwitcher">
-            <NavLink exact to="/" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sign In</NavLink>
-            <NavLink to="/sign-up" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sign Up</NavLink>
+            <NavLink to="/login" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sign In</NavLink>
+            <NavLink exact to="/login/signup" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sign Up</NavLink>
           </div>
   
           <div className="FormTitle">
-            <NavLink exact to="/" activeClassName="FormTitle__Link--Active" className="FormTitle__Link"> Sign In</NavLink> or 
-            <NavLink to="/sign-up" activeClassName="FormTitle__Link--Active" className="FormTitle__Link"> Sign Up</NavLink>
+            <NavLink to="/login" activeClassName="FormTitle__Link--Active" className="FormTitle__Link"> Sign In</NavLink> or 
+            <NavLink exact to="/login/signup" activeClassName="FormTitle__Link--Active" className="FormTitle__Link"> Sign Up</NavLink>
           </div>
   
-          <Route path="/sign-up" render={(props) => <SignUpForm {...props} changeState = {this.props.changeState}/>}>
+          <Route path="/login/signup" component = {SignUpForm}>
           </Route>
           
-          <Route exact path="/" render={(props) => <SignInForm {...props} changeState = {this.props.changeState}/>}>
+          <Route exact path="/login" component = {SignInForm}>
           </Route>
 
         </div>
       </div>
-      </Router>
+      </Switch>
     );
   }
   }

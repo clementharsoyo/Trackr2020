@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+/* Register function, will post the data accepted from user input into
+    the database */
 export const register = (newUser) => {
     return axios
         .post("http://localhost:5000/api/users/" + "signup", { 
@@ -12,10 +14,12 @@ export const register = (newUser) => {
         })
 }
 
+/* Register function, will post the data accepted from user input into
+    the database, and compare if they match */
 export const login = (user) => {
     return axios
         .post("http://localhost:5000/api/users/" + "signin", {
-            username: user.username,
+            usernameOrEmail: user.username,
             password: user.password
         })
         .then(response => {

@@ -11,9 +11,10 @@ class SignUpForm extends Component {
         password: '',
         isPasswordShown: false,
         email: '',
-        errors: {}
     };
     
+    /* When filling the form, will update the state to accept 
+        user input */
     handleChange = (e) => {
         let target = e.target;
         let value = target.value
@@ -24,6 +25,8 @@ class SignUpForm extends Component {
         })
     }
 
+    /* When submit, will perform register new user to database,
+        hence navigate to homepage */
     handleSubmit = (e) => {
         e.preventDefault();
         console.log('Form submitted with these data: ')
@@ -33,12 +36,15 @@ class SignUpForm extends Component {
             password: this.state.password,
             email: this.state.email
         }
-        console.log(newUser)
-        register(newUser).then(response => {
-            this.props.history.push('/')
+        register(newUser).then(resp => {
+            /* this.props.changeState() */
+            console.log("Registered")
+            this.props.history.push("/")
         })
     }
 
+    /* When enabled, password will be displayed either as text
+        or hidden */
     togglePasswordVisiblity = () => {
         const { isPasswordShown } = this.state;
         this.setState({ isPasswordShown: !isPasswordShown });
@@ -49,7 +55,7 @@ class SignUpForm extends Component {
             <div className="FormCenter">
                 <form onSubmit={this.handleSubmit} className="FormFields">
                         
-                    {/* for Username */}
+                    {/* Section for username */}
                     <div className="FormField">
                         <label className="FormField__Label" htmlFor="username">Username</label>
                         <input type="text" id="username" className="FormField__Input" 
@@ -58,7 +64,7 @@ class SignUpForm extends Component {
                             />
                     </div>
 
-                    {/* for Password */}
+                    {/* Section for password */}
                     <div className="FormField">
                         <label className="FormField__Label" htmlFor="password">Password</label>
                         <input type={this.state.isPasswordShown ? "text" : "password"} id="password" className="FormField__Input" 
@@ -72,7 +78,7 @@ class SignUpForm extends Component {
                         </i>
                     </div>
 
-                    {/* for Email */}
+                    {/* Section for email */}
                     <div className="FormField">
                         <label className="FormField__Label" htmlFor="email">Email Address</label>
                         <input type="text" id="email" className="FormField__Input" 
@@ -84,7 +90,7 @@ class SignUpForm extends Component {
                     {/* Sign Up Button */}
                     <div className="FormField">
                         <button className="FormField__Button waves-effect waves-light mr-20" type="Submit">Sign Up</button>
-                        <Link to="/" className="FormField__Link">Have an account?</Link>
+                        <Link exact to="/login" className="FormField__Link">Have an account?</Link>
                     </div>
                 </form>
             </div>
