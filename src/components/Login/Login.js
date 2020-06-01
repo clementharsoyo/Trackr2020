@@ -17,19 +17,19 @@ class Login extends Component {
         <div className="App__Form">
   
           <div className="PageSwitcher">
-            <NavLink to="/login" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sign In</NavLink>
-            <NavLink exact to="/login/signup" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sign Up</NavLink>
+            <NavLink exact to="/login" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sign In</NavLink>
+            <NavLink to="/login/signup" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sign Up</NavLink>
           </div>
   
           <div className="FormTitle">
-            <NavLink to="/login" activeClassName="FormTitle__Link--Active" className="FormTitle__Link"> Sign In</NavLink> or 
-            <NavLink exact to="/login/signup" activeClassName="FormTitle__Link--Active" className="FormTitle__Link"> Sign Up</NavLink>
+            <NavLink exact to="/login" activeClassName="FormTitle__Link--Active" className="FormTitle__Link"> Sign In</NavLink> or 
+            <NavLink to="/login/signup" activeClassName="FormTitle__Link--Active" className="FormTitle__Link"> Sign Up</NavLink>
           </div>
   
-          <Route path="/login/signup" component = {SignUpForm}>
+          <Route path="/login/signup" render={(props)=> <SignUpForm { ... props } changeState = {this.props.changeState}/>}>
           </Route>
           
-          <Route exact path="/login" component = {SignInForm}>
+          <Route exact path="/login" render={(props)=> <SignInForm { ... props } changeState = {this.props.changeState}/>}>
           </Route>
 
         </div>

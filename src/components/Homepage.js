@@ -3,7 +3,7 @@ import Board from "../board.png"
 import { Link } from 'react-router-dom';
 import "./Home.css"
 
-const Homepage = () => {
+const Homepage = (props) => {
   return (
     <div>
       <div className="container">

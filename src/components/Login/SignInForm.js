@@ -33,13 +33,17 @@ class SignInForm extends Component {
             username: this.state.username,
             password: this.state.password
         }
+        this.props.changeState(userData.username)
         console.log(userData)
         login(userData)
         .then(res => {
             if (res) {
             console.log('Login Successful')
-            this.props.history.push("/")
-            } 
+            this.props.history.push({
+                pathname: "/",
+                state: { username: userData.username }
+                })
+            }
         })
     }
 
@@ -80,7 +84,7 @@ class SignInForm extends Component {
 
                     {/* Sign In Button */}
                     <div className="FormField">
-                        <button className="FormField__Button waves-effect waves-light mr-20" type="Submit" /* onClick={this.changeState} */>Sign In</button>
+                        <button className="FormField__Button waves-effect waves-light mr-20" type="Submit">Sign In</button>
                         <Link to="/login/signup" className="FormField__Link">New to Trackr?</Link>
                         </div>
                 </form>

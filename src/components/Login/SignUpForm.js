@@ -37,9 +37,12 @@ class SignUpForm extends Component {
             email: this.state.email
         }
         register(newUser).then(resp => {
-            /* this.props.changeState() */
             console.log("Registered")
-            this.props.history.push("/")
+            this.props.changeState(newUser.username)
+            this.props.history.push({
+                pathname: "/",
+                state: { username: newUser.username }
+            })
         })
     }
 
