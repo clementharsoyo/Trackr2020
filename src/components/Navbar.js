@@ -11,7 +11,7 @@ const Navbar = (props) => {
           <li><Link to="/dashboard">Dashboard</Link></li>
           <li><Link to="/activity">Activity</Link></li>
           <li><Link to="/login" className="waves-effect waves-light btn-small" onClick={props.logOut}>LOGOUT</Link></li>
-          <li>{ <p> Welcome, { props.username } </p> }</li>
+          <li>{ props.username } </li>
         </ul>
       </div>
     </nav> 
@@ -20,9 +20,6 @@ const Navbar = (props) => {
       <div className="container">
         <a className="brand-logo">Trackr.</a>
         <ul className="right">
-          <li><Link to="/">Homepage</Link></li>
-          <li><Link to="/dashboard">Dashboard</Link></li>
-          <li><Link to="/activity">Activity</Link></li>
           <li><Link to="/login" className="waves-effect waves-light btn-small" onClick={props.logOut}>LOGIN</Link></li>
         </ul>
       </div>

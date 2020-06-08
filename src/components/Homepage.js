@@ -2,6 +2,7 @@ import React from 'react'
 import Board from "../board.png"
 import { Link } from 'react-router-dom';
 import "./Home.css"
+import { Video } from "../Trackr intro video.mp4";
 
 const Homepage = (props) => {
   return (
@@ -9,6 +10,7 @@ const Homepage = (props) => {
       <div className="container">
         <div className="row">
           <div className="col s7 push-s5"> 
+              <h1> Put Video Here </h1>
           </div>
           <div className="col s5 pull-s7">
             <h3 style={{color: "grey", fontSize: 60, fontFamily: "Palatino"}}>Organize <span style={{fontFamily: "Palatino"}}>your job search</span></h3>
@@ -29,7 +31,7 @@ const Homepage = (props) => {
                   Track them on each stage or switch to calendar view whenever needed.</p>
               </div>
               <div className="card-action">
-                <Link to="/dashboard">Try it here!</Link>
+                { /* <Link to="/dashboard">Try it here!</Link> */ }
               </div>
             </div>
           </div>
@@ -44,7 +46,7 @@ const Homepage = (props) => {
                   on approaching application deadline and interview schedule.</p>
               </div>
               <div className="card-action">
-                <Link to="/dashboard">See it here!</Link>
+                { /* <Link to="/dashboard">See it here!</Link> */ }
               </div>
             </div>
           </div>
@@ -59,7 +61,7 @@ const Homepage = (props) => {
                 This way, your bookmark on LinkedIn job search will be automatically added into your board. </p>
               </div>
               <div className="card-action">
-                <Link to="/sign-up">Integrate it here!</Link>
+                { /* <Link to="/sign-up">Integrate it here!</Link> */ }
               </div>
             </div>
           </div>

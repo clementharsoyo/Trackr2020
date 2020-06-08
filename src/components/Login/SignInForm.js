@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { login } from "../UserFunctions.js"
+/* import { login } from "../UserFunctions.js" */
+import axios from 'axios'
 
 class SignInForm extends Component {
     
@@ -10,7 +11,26 @@ class SignInForm extends Component {
         username: '',
         password: '',
         isPasswordShown: false,
+        errors: [],
     };
+
+    login = (user) => {
+        return axios
+            .post("http://localhost:5000/api/users/" + "signin", {
+                usernameOrEmail: user.username,
+                password: user.password
+            })
+            .then(response => {
+                localStorage.setItem('usertoken', response.data)
+                return response.data
+            })
+            .catch(err => {
+                this.setState({
+                    errors: err.response.data
+                })
+                console.log(err.response.data)
+            })
+    }
     
     /* When filling the form, will update the state to accept 
         user input */
@@ -28,20 +48,19 @@ class SignInForm extends Component {
         hence navigate to homepage */
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Form submitted with these data: ')
         const userData = {
             username: this.state.username,
             password: this.state.password
         }
-        this.props.changeState(userData.username)
+        console.log('Form submitted with these data: ')
         console.log(userData)
-        login(userData)
+        this.props.changeState(userData.username)
+        this.login(userData)
         .then(res => {
             if (res) {
-            console.log('Login Successful')
-            this.props.history.push({
-                pathname: "/",
-                state: { username: userData.username }
+                console.log('Login Successful')
+                this.props.history.push({
+                    pathname: "/",
                 })
             }
         })
@@ -62,11 +81,14 @@ class SignInForm extends Component {
                         
                     {/* Section for username */}
                     <div className="FormField">
-                        <label className="FormField__Label" htmlFor="username">Username</label>
+                        <label className="FormField__Label" htmlFor="username">Username / Email</label>
                         <input type="text" id="username" className="FormField__Input" 
-                            placeholder="Enter your username" name="username" autoComplete="off"
+                            placeholder="Enter your username or email" name="username" autoComplete="off"
                             value={this.state.username} onChange={this.handleChange}
                             />
+                        <p style={{color: "#a82424"}}>{ this.state.errors.usernameOrEmail } </p>
+                        <p style={{color: "#a82424"}}> { this.state.errors.username } </p>
+                        <p style={{color: "#a82424"}}> { this.state.errors.email } </p>
                     </div>
 
                     {/* Section for password */}
@@ -80,6 +102,8 @@ class SignInForm extends Component {
                                 onClick={this.togglePasswordVisiblity}
                             />
                         </i>
+                        <p style={{color: "#a82424"}}> { this.state.errors.password } </p>
+                        <p style={{color: "#a82424"}}> { this.state.errors.passwordincorrect } </p>
                     </div>
 
                     {/* Sign In Button */}

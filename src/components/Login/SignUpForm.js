@@ -11,8 +11,9 @@ class SignUpForm extends Component {
         password: '',
         isPasswordShown: false,
         email: '',
+        errors: []
     };
-    
+
     /* When filling the form, will update the state to accept 
         user input */
     handleChange = (e) => {
@@ -41,8 +42,13 @@ class SignUpForm extends Component {
             this.props.changeState(newUser.username)
             this.props.history.push({
                 pathname: "/",
-                state: { username: newUser.username }
             })
+        })
+        .catch(err => {
+            this.setState({
+                errors: err.response.data
+            })
+            console.log(err.response.data)
         })
     }
 
@@ -65,6 +71,7 @@ class SignUpForm extends Component {
                             placeholder="Enter your new username" name="username" autoComplete="off"
                             value={this.state.username} onChange={this.handleChange}
                             />
+                        <p style={{color: "#a82424"}}> { this.state.errors.username } </p>
                     </div>
 
                     {/* Section for password */}
@@ -79,6 +86,7 @@ class SignUpForm extends Component {
                                 onClick={this.togglePasswordVisiblity}
                             />
                         </i>
+                        <p style={{color: "#a82424"}}>{ this.state.errors.password } </p>
                     </div>
 
                     {/* Section for email */}
@@ -88,6 +96,7 @@ class SignUpForm extends Component {
                             placeholder="Enter your email address" name="email" autoComplete="off"
                             value={this.state.email} onChange={this.handleChange}
                             />
+                        <p style={{color: "#a82424"}}>{ this.state.errors.email } </p>
                     </div>
 
                     {/* Sign Up Button */}
