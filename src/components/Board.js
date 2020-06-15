@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 
-class toApplyBoard extends Component {
+class Board extends Component {
     drop = (e) => {
         e.preventDefault();
         const card_id = e.dataTransfer.getData('card_id');
         const card = document.getElementById(card_id);
         card.style.display = 'block';
-        e.target.appendChild(card)
+        e.target.appendChild(card);
+        console.log(card)
     }
 
     dragOver = (e) => {
@@ -23,4 +24,4 @@ class toApplyBoard extends Component {
     
 }
 
-export default toApplyBoard
+export default Board

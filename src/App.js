@@ -6,11 +6,13 @@ import Navbar from './components/Navbar';
 import Homepage from './components/Homepage';
 import Dashboard from './components/Dashboard';
 import Activity from './components/Activity';
+import axios from 'axios';
 
 class App extends Component {
   state = {
     username: "",
-    loggedIn: false
+    loggedIn: false,
+    jobs: []
   }
 
   changeState = (name) => {
@@ -25,6 +27,35 @@ class App extends Component {
       username: ""
     })
   }
+
+  addNewJobs = (newJob) => {
+    newJob.id = Math.random();
+    let newJobsArray = [...this.state.jobs, newJob]
+    this.setState({
+      jobs: newJobsArray
+    })
+  }
+
+  deleteJobs = (id) => {
+    const filteredJobs = this.state.jobs.filter(job => {
+      return job.id !== id
+    });
+    this.setState({
+      jobs: filteredJobs
+    })
+  }
+
+  componenDidMount() {
+    axios.get("http://localhost:5000/api/users/")
+    .then(response => {
+      this.setState({
+        jobs: response.data.jobs
+      })
+    })
+    .catch(error => {
+      console.log(error.response.data)
+    })
+  } 
   
   render() {
     return (
@@ -33,7 +64,8 @@ class App extends Component {
           <Navbar username={this.state.username} logOut={this.logOut}/>
           <Route exact path="/" component = { Homepage } />
           <Route path="/login" render={(props)=> <Login changeState = {this.changeState}/>} />
-          <Route path="/dashboard" component = { Dashboard }/>
+          <Route path="/dashboard" render={(props)=> <Dashboard addNewJobs = {this.addNewJobs} 
+              deleteJobs = {this.deleteJobs} jobList={this.state.jobs} username = {this.state.username} />} />
           <Route path="/activity" component = { Activity }/>
         </div>
       </Router>

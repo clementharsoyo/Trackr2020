@@ -54,11 +54,11 @@ class SignInForm extends Component {
         }
         console.log('Form submitted with these data: ')
         console.log(userData)
-        this.props.changeState(userData.username)
         this.login(userData)
         .then(res => {
             if (res) {
                 console.log('Login Successful')
+                this.props.changeState(userData.username)
                 this.props.history.push({
                     pathname: "/",
                 })

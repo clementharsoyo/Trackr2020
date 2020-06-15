@@ -20,6 +20,7 @@ const Navbar = (props) => {
       <div className="container">
         <a className="brand-logo">Trackr.</a>
         <ul className="right">
+          <li><Link to="/">Homepage</Link></li>
           <li><Link to="/login" className="waves-effect waves-light btn-small" onClick={props.logOut}>LOGIN</Link></li>
         </ul>
       </div>
