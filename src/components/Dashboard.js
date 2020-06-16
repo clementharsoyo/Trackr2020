@@ -13,7 +13,7 @@ const Dashboard= ({addNewJobs, deleteJobs, jobList, username}) => {
           <h5 style={{color: "white"}}> {job.company} </h5>
           <p style={{color: "yellow"}}> {job.role} </p>
           <button className="waves-effect waves-teal btn-flat"
-          onClick={() => {deleteJobs(job.id)}} type="submit" name="action">
+          onClick={() => deleteJobs(job.id)} type="submit" name="action">
             <i class="material-icons tiny right">clear</i>
           </button>
         </Card>
@@ -28,7 +28,7 @@ const Dashboard= ({addNewJobs, deleteJobs, jobList, username}) => {
           <h5 style={{color: "white"}}> {job.company} </h5>
           <p style={{color: "yellow"}}> {job.role} </p>
           <button className="waves-effect waves-teal btn-flat"
-          onClick={() => {deleteJobs(job.id)}} type="submit" name="action">
+          onClick={() => deleteJobs(job.id)} type="submit" name="action">
             <i class="material-icons tiny right">clear</i>
           </button>
         </Card>
@@ -43,7 +43,7 @@ const Dashboard= ({addNewJobs, deleteJobs, jobList, username}) => {
           <h5 style={{color: "white"}}> {job.company} </h5>
           <p style={{color: "yellow"}}> {job.role} </p>
           <button className="waves-effect waves-teal btn-flat"
-          onClick={() => {deleteJobs(job.id)}} type="submit" name="action">
+          onClick={() => deleteJobs(job.id)} type="submit" name="action">
             <i class="material-icons tiny right">clear</i>
           </button>
         </Card>
@@ -58,7 +58,7 @@ const Dashboard= ({addNewJobs, deleteJobs, jobList, username}) => {
           <h5 style={{color: "white"}}> {job.company} </h5>
           <p style={{color: "yellow"}}> {job.role} </p>
           <button className="waves-effect waves-teal btn-flat"
-          onClick={() => {deleteJobs(job.id)}} type="submit" name="action">
+          onClick={() => deleteJobs(job.id)} type="submit" name="action">
             <i class="material-icons tiny right">clear</i>
           </button>
         </Card>

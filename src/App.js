@@ -34,19 +34,28 @@ class App extends Component {
     this.setState({
       jobs: newJobsArray
     })
+    return newJobsArray
   }
 
   deleteJobs = (id) => {
+    console.log(this.state.jobs)
     const filteredJobs = this.state.jobs.filter(job => {
       return job.id !== id
     });
     this.setState({
       jobs: filteredJobs
     })
+    const newObj = {
+      username: this.state.username,
+      update: {
+          jobs: filteredJobs
+      }
+    }
+    axios.put("http://localhost:5000/api/users/", newObj)
   }
 
-  componenDidMount() {
-    axios.get("http://localhost:5000/api/users/")
+  componentDidMount() {
+    axios.get("http://localhost:5000/api/users/", { data : { username : this.state.username } })
     .then(response => {
       this.setState({
         jobs: response.data.jobs

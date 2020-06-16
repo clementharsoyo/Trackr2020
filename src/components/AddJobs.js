@@ -26,11 +26,11 @@ class AddJobs extends Component {
             status: this.state.status
         }
         console.log(newJob)
-        this.props.addNewJobs(newJob) 
+        const newArr = this.props.addNewJobs(newJob) 
         const newObj = {
             username: this.props.username,
             update: {
-                jobs: [newJob]
+                jobs: newArr
             }
         }
         axios.put("http://localhost:5000/api/users/", newObj)
