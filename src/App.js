@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Homepage from './components/Homepage';
 import Dashboard from './components/Dashboard';
 import Activity from './components/Activity';
+import Secondboard from './components/Secondboard/Secondboard';
 import axios from 'axios';
 import 'materialize-css/dist/css/materialize.min.css';
 
@@ -76,6 +77,8 @@ class App extends Component {
           <Route path="/dashboard" render={(props)=> <Dashboard addNewJobs = {this.addNewJobs} 
               deleteJobs = {this.deleteJobs} jobList={this.state.jobs} username = {this.state.username} />} />
           <Route path="/activity" component = { Activity }/>
+          <Route path="/secondboard" render={(props)=> <Secondboard addNewJobs = {this.addNewJobs} 
+              deleteJobs = {this.deleteJobs} jobList={this.state.jobs} username = {this.state.username} />} />
         </div>
       </Router>
     );

@@ -8,6 +8,7 @@ class AddJobs extends Component {
         role: '',
         status: '',
         schedule: '',
+        time: ''
     };
 
     handleChange = (e) => {
@@ -27,6 +28,7 @@ class AddJobs extends Component {
             role: this.state.role,
             status: this.state.status,
             schedule: this.state.schedule,
+            interviewDate: new Date(this.state.schedule + "T" + this.state.time + ":00.000Z")
         }
         console.log(newJob)
         const newArr = this.props.addNewJobs(newJob) 
@@ -44,6 +46,7 @@ class AddJobs extends Component {
             role: '',
             status: '',
             schedule: '',
+            time: '',
         })
     }
 
@@ -54,7 +57,7 @@ class AddJobs extends Component {
     render() {
         return (
             <div className="row">
-                <form className="col s12" onSubmit={this.handleSubmit}>
+                <form className="col s13" onSubmit={this.handleSubmit}>
                     <div className="row">
                         <div className="input-field col s3">
                             <i className="material-icons prefix">work</i>
@@ -81,11 +84,18 @@ class AddJobs extends Component {
                             <label htmlFor="status"></label>
                         </div>
                         <div className="input-field col s3">
-                            <i className="material-icons prefix">date_range</i>
-                            <input id="schedule" type="text" className="datepicker"
+                            <i className="material-icons prefix"></i>
+                            <input id="schedule" type="date" 
                                 name="schedule" value={this.state.schedule} onChange={this.handleChange}
                                 autoComplete="off" /> 
-                            <label htmlFor="schedule">Date</label>
+                            <label htmlFor="schedule"></label>
+                        </div>
+                        <div className="input-field col s2">
+                            <i className="material-icons prefix"></i>
+                            <input id="time" type="time" 
+                                name="time" value={this.state.time} onChange={this.handleChange}
+                                autoComplete="off" /> 
+                            <label htmlFor="time"></label>
                         </div>
                     </div>
                     <button className="FormField__Button waves-effect waves-light mr-20" type="Submit">Add</button>
