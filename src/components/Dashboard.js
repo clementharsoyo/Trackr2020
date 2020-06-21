@@ -9,10 +9,10 @@ const Dashboard= ({addNewJobs, deleteJobs, jobList, username}) => {
   const jobListToApply = jobList.map(job => { 
     if (job.status === 'toApply') {
       return (
-        <Card id="card-1" className="card blue-grey darken-1"draggable="true" key={job.id}>
-          <h5 style={{color: "white"}}> {job.company} </h5>
-          <p style={{color: "yellow"}}> {job.role} </p>
-          <button className="waves-effect waves-teal btn-flat"
+        <Card id="card-1" className="blue-grey darken 1" draggable="true" key={job.id}>
+          <h5 style={{color: "blue", textAlign: "center"}}> {job.company} </h5>
+          <p style={{color: "yellow", fontSize: 12, textAlign: "center"}}> {job.role} </p>
+          <button style={{textAlign: "center"}} className="waves-effect waves-teal btn-flat"
           onClick={() => deleteJobs(job.id)} type="submit" name="action">
             <i class="material-icons tiny right">clear</i>
           </button>
@@ -24,9 +24,9 @@ const Dashboard= ({addNewJobs, deleteJobs, jobList, username}) => {
   const jobListApplied = jobList.map(job => { 
     if (job.status === 'applied') {
       return (
-        <Card id="card-1" className="card blue-grey darken-1"draggable="true" key={job.id}>
-          <h5 style={{color: "white"}}> {job.company} </h5>
-          <p style={{color: "yellow"}}> {job.role} </p>
+        <Card id="card-1" className="lime darken-1" draggable="true" key={job.id}>
+          <h5 style={{color: "white", textAlign: "center"}}> {job.company} </h5>
+          <p style={{color: "yellow", fontSize: 12, textAlign: "center"}}> {job.role} </p>
           <button className="waves-effect waves-teal btn-flat"
           onClick={() => deleteJobs(job.id)} type="submit" name="action">
             <i class="material-icons tiny right">clear</i>
@@ -39,9 +39,9 @@ const Dashboard= ({addNewJobs, deleteJobs, jobList, username}) => {
   const jobListInterview = jobList.map(job => { 
     if (job.status === 'interview') {
       return (
-        <Card id="card-1" className="card blue-grey darken-1"draggable="true" key={job.id}>
-          <h5 style={{color: "white"}}> {job.company} </h5>
-          <p style={{color: "yellow"}}> {job.role} </p>
+        <Card id="card-1" className="blue-grey darken-1" draggable="true" key={job.id}>
+          <h5 style={{color: "white", textAlign: "center"}}> {job.company} </h5>
+          <p style={{color: "yellow", fontSize: 12, textAlign: "center"}}> {job.role} </p>
           <button className="waves-effect waves-teal btn-flat"
           onClick={() => deleteJobs(job.id)} type="submit" name="action">
             <i class="material-icons tiny right">clear</i>
@@ -54,9 +54,9 @@ const Dashboard= ({addNewJobs, deleteJobs, jobList, username}) => {
   const jobListOffer = jobList.map(job => { 
     if (job.status === 'offer') {
       return (
-        <Card id="card-1" className="card blue-grey darken-1"draggable="true" key={job.id}>
-          <h5 style={{color: "white"}}> {job.company} </h5>
-          <p style={{color: "yellow"}}> {job.role} </p>
+        <Card id="card-1" className="lime darken-1" draggable="true" key={job.id}>
+          <h5 style={{color: "white", textAlign: "center"}}> {job.company} </h5>
+          <p style={{color: "yellow", fontSize: 12, textAlign: "center"}}> {job.role} </p>
           <button className="waves-effect waves-teal btn-flat"
           onClick={() => deleteJobs(job.id)} type="submit" name="action">
             <i class="material-icons tiny right">clear</i>
@@ -67,7 +67,6 @@ const Dashboard= ({addNewJobs, deleteJobs, jobList, username}) => {
   })
 
   return (
-    <div>
       <div className="container">
         <div className="flexbox">
           
@@ -75,28 +74,26 @@ const Dashboard= ({addNewJobs, deleteJobs, jobList, username}) => {
             <h5 className="center" style={{color: "blue"}}>To Apply</h5>
             { jobListToApply }
           </Board>
-          <span className="divider"></span>
           
           <Board id="board-2" className="board">
             <h5 className="center" style={{color: "teal"}}>Applied</h5>
             { jobListApplied }
           </Board>
-          <span className="divider"></span>
           
           <Board id="board-3" className="board">
             <h5 className="center" style={{color: "purple"}}>Interview</h5>
             { jobListInterview }
           </Board>
-          <span className="divider"></span>
           
           <Board id="board-4" className="board">
-          <h5 className="center" style={{color: "green"}}>Offer</h5>
+            <h5 className="center" style={{color: "green"}}>Offered</h5>
             { jobListOffer }
           </Board>
+        
         </div>
         <AddJobs addNewJobs = {addNewJobs} username = {username}/>
      </div>
-    </div>
+    
   )
 }
 

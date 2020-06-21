@@ -2,7 +2,6 @@ import React from 'react'
 import Board from "../board.png"
 import { Link } from 'react-router-dom';
 import "./Home.css"
-import { Video } from "../Trackr intro video.mp4";
 
 const Homepage = (props) => {
   return (
@@ -10,7 +9,6 @@ const Homepage = (props) => {
       <div className="container">
         <div className="row">
           <div className="col s7 push-s5"> 
-              <h1> Put Video Here </h1>
           </div>
           <div className="col s5 pull-s7">
             <h3 style={{color: "grey", fontSize: 60, fontFamily: "Palatino"}}>Organize <span style={{fontFamily: "Palatino"}}>your job search</span></h3>

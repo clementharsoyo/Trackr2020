@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = (props) => {
-  return ( props.username ? 
-    <nav className="nav-wrapper lime darken-2">
+  return ( localStorage.getItem('usertoken') ? 
+    <nav className="nav-wrapper blue darken-4">
       <div className="container">
         <a className="brand-logo">Trackr.</a>
         <ul className="right">
@@ -11,12 +11,12 @@ const Navbar = (props) => {
           <li><Link to="/dashboard">Dashboard</Link></li>
           <li><Link to="/activity">Activity</Link></li>
           <li><Link to="/login" className="waves-effect waves-light btn-small" onClick={props.logOut}>LOGOUT</Link></li>
-          <li>{ props.username } </li>
+          <li>Welcome, {localStorage.getItem('username') } </li>
         </ul>
       </div>
     </nav> 
     :
-    <nav className="nav-wrapper lime darken-2">
+    <nav className="nav-wrapper teal darken-4">
       <div className="container">
         <a className="brand-logo">Trackr.</a>
         <ul className="right">

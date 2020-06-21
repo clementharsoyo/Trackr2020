@@ -1,11 +1,13 @@
 import React , { Component } from 'react'
 import axios from 'axios';
+import M from "materialize-css"
 
 class AddJobs extends Component {
     state = {
         company: '',
         role: '',
-        status: ''
+        status: '',
+        schedule: '',
     };
 
     handleChange = (e) => {
@@ -23,12 +25,15 @@ class AddJobs extends Component {
         const newJob = {
             company: this.state.company,
             role: this.state.role,
-            status: this.state.status
+            status: this.state.status,
+            schedule: this.state.schedule,
         }
         console.log(newJob)
         const newArr = this.props.addNewJobs(newJob) 
         const newObj = {
             username: this.props.username,
+            add: true,
+            updatedJob: newJob,
             update: {
                 jobs: newArr
             }
@@ -37,8 +42,13 @@ class AddJobs extends Component {
         this.setState({
             company: '',
             role: '',
-            status: ''
+            status: '',
+            schedule: '',
         })
+    }
+
+    componentDidMount() {
+        M.AutoInit()
     }
 
     render() {
@@ -46,23 +56,36 @@ class AddJobs extends Component {
             <div className="row">
                 <form className="col s12" onSubmit={this.handleSubmit}>
                     <div className="row">
-                        <div className="input-field col s4">
+                        <div className="input-field col s3">
                             <i className="material-icons prefix">work</i>
-                            <input placeholder="Company Name" id="company" type="text" className="validate"
-                                name="company" value={this.state.company} onChange={this.handleChange} />
-                            <label htmlFor="company"></label>
+                            <input id="company" type="text" className="validate"
+                                name="company" value={this.state.company} onChange={this.handleChange} autoComplete="off"/>
+                            <label htmlFor="company">Company</label>
                         </div>
-                        <div className="input-field col s4">
+                        <div className="input-field col s3">
                             <i className="material-icons prefix">person</i>
-                            <input placeholder="Role" id="role" type="text" className="validate" 
-                                name="role" value={this.state.role} onChange={this.handleChange} />
-                            <label htmlFor="role"></label>
+                            <input id="role" type="text" className="validate" 
+                                name="role" value={this.state.role} onChange={this.handleChange} autoComplete="off"/>
+                            <label htmlFor="role">Role</label>
                         </div>
-                        <div className="input-field col s4">
+                        <div className="input-field col s3">
                             <i className="material-icons prefix">sms</i>
-                            <input placeholder="Status" id="status" type="text" className="validate" 
-                                name="status" value={this.state.status} onChange={this.handleChange} />
+                            <select id="status" name="status"
+                                value={this.state.status} onChange={this.handleChange} autoComplete="off">
+                                <option value="" disabled selected>Status</option>
+                                <option value="toApply">To Apply</option>
+                                <option value="applied">Applied</option>
+                                <option value="interview">Interview</option>
+                                <option value="offer">Offer</option>
+                            </select>
                             <label htmlFor="status"></label>
+                        </div>
+                        <div className="input-field col s3">
+                            <i className="material-icons prefix">date_range</i>
+                            <input id="schedule" type="text" className="datepicker"
+                                name="schedule" value={this.state.schedule} onChange={this.handleChange}
+                                autoComplete="off" /> 
+                            <label htmlFor="schedule">Date</label>
                         </div>
                     </div>
                     <button className="FormField__Button waves-effect waves-light mr-20" type="Submit">Add</button>

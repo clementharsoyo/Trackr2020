@@ -5,16 +5,8 @@
 }
 
 body {
-    background-color: white
+    background-color: whitesmoke
 }
-
-.divider {
-    width: 1px;
-    background-color: palegoldenrod;
-    margin-left: 20px;
-    margin-right: 20px;
-    height: 90vh;
-  }
 
 .flexbox {
     display: flex;
@@ -24,20 +16,21 @@ body {
     height: 100vh;
     overflow: hidden;
     margin: 0 auto;
-    padding: 25px
+    padding: 25px;
 }
 
 .flexbox .board {
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 300px;
+    max-width: 190px;
     padding: 15px;
 }
 
 .flexbox .board .card {
+    width: 200px;
+    height: 150px;
     padding: 15px 25px;
     cursor: pointer;
     margin-bottom: 15px;
-
 }

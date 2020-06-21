@@ -7,24 +7,24 @@ import Homepage from './components/Homepage';
 import Dashboard from './components/Dashboard';
 import Activity from './components/Activity';
 import axios from 'axios';
+import 'materialize-css/dist/css/materialize.min.css';
 
 class App extends Component {
   state = {
-    username: "",
-    loggedIn: false,
+    username: '',
     jobs: []
   }
 
   changeState = (name) => {
     this.setState({
       username: name,
-      loggedIn: !this.state.loggedIn
     })
   }
 
   logOut = () => {
+    localStorage.clear()
     this.setState({
-      username: ""
+      username: '',
     })
   }
 
@@ -62,7 +62,7 @@ class App extends Component {
       })
     })
     .catch(error => {
-      console.log(error.response.data)
+      console.log(error)
     })
   } 
   

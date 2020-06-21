@@ -22,6 +22,7 @@ class SignInForm extends Component {
             })
             .then(response => {
                 localStorage.setItem('usertoken', response.data)
+                localStorage.setItem('username', response.data.user.username)
                 return response.data
             })
             .catch(err => {
