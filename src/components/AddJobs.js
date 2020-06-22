@@ -1,5 +1,6 @@
 import React , { Component } from 'react'
 import axios from 'axios';
+import "./Thirdboard/Thirdboard.css"
 import M from "materialize-css"
 
 class AddJobs extends Component {
@@ -41,6 +42,7 @@ class AddJobs extends Component {
             }
         }
         axios.put("http://localhost:5000/api/users/", newObj)
+        this.props.closePopup()
         this.setState({
             company: '',
             role: '',
@@ -56,22 +58,24 @@ class AddJobs extends Component {
 
     render() {
         return (
+            <div className='popup'>
+            <div className='popup_inner'>
             <div className="row">
-                <form className="col s13" onSubmit={this.handleSubmit}>
+                <form className="col s12" onSubmit={this.handleSubmit}>
                     <div className="row">
-                        <div className="input-field col s3">
+                        <div className="input-field col s12">
                             <i className="material-icons prefix">work</i>
                             <input id="company" type="text" className="validate"
                                 name="company" value={this.state.company} onChange={this.handleChange} autoComplete="off"/>
                             <label htmlFor="company">Company</label>
                         </div>
-                        <div className="input-field col s3">
+                        <div className="input-field col s12">
                             <i className="material-icons prefix">person</i>
                             <input id="role" type="text" className="validate" 
                                 name="role" value={this.state.role} onChange={this.handleChange} autoComplete="off"/>
                             <label htmlFor="role">Role</label>
                         </div>
-                        <div className="input-field col s3">
+                        <div className="input-field col s12">
                             <i className="material-icons prefix">sms</i>
                             <select id="status" name="status"
                                 value={this.state.status} onChange={this.handleChange} autoComplete="off">
@@ -83,14 +87,14 @@ class AddJobs extends Component {
                             </select>
                             <label htmlFor="status"></label>
                         </div>
-                        <div className="input-field col s3">
-                            <i className="material-icons prefix"></i>
+                        <div className="input-field col s6">
+                            <i className="material-icons prefix">access_alarm</i>
                             <input id="schedule" type="date" 
                                 name="schedule" value={this.state.schedule} onChange={this.handleChange}
                                 autoComplete="off" /> 
                             <label htmlFor="schedule"></label>
                         </div>
-                        <div className="input-field col s2">
+                        <div className="input-field col s6">
                             <i className="material-icons prefix"></i>
                             <input id="time" type="time" 
                                 name="time" value={this.state.time} onChange={this.handleChange}
@@ -99,7 +103,12 @@ class AddJobs extends Component {
                         </div>
                     </div>
                     <button className="FormField__Button waves-effect waves-light mr-20" type="Submit">Add</button>
+                    <button onClick={this.props.closePopup}>
+                        <i class="material-icons tiny">clear</i>
+                    </button>
                 </form>
+            </div>
+            </div>
             </div>
         )
     }

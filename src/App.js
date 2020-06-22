@@ -6,7 +6,7 @@ import Navbar from './components/Navbar';
 import Homepage from './components/Homepage';
 import Dashboard from './components/Dashboard';
 import Activity from './components/Activity';
-import Secondboard from './components/Secondboard/Secondboard';
+import Thirdboard from './components/Thirdboard/Thirdboard';
 import axios from 'axios';
 import 'materialize-css/dist/css/materialize.min.css';
 
@@ -22,6 +22,13 @@ class App extends Component {
     })
   }
 
+  editJobs = (arr) => {
+    this.setState({
+      ...this.state,
+      jobs: arr
+    })
+  }
+
   logOut = () => {
     localStorage.clear()
     this.setState({
@@ -30,7 +37,7 @@ class App extends Component {
   }
 
   addNewJobs = (newJob) => {
-    newJob.id = Math.random();
+    newJob.id = Math.random().toString()
     let newJobsArray = [...this.state.jobs, newJob]
     this.setState({
       jobs: newJobsArray
@@ -40,6 +47,10 @@ class App extends Component {
 
   deleteJobs = (id) => {
     console.log(this.state.jobs)
+    const deletedJob = this.state.jobs.find(job => {
+      return job.id === id
+    })
+    console.log(deletedJob)
     const filteredJobs = this.state.jobs.filter(job => {
       return job.id !== id
     });
@@ -48,6 +59,8 @@ class App extends Component {
     })
     const newObj = {
       username: this.state.username,
+      delete: true,
+      updatedJob: deletedJob,
       update: {
           jobs: filteredJobs
       }
@@ -77,8 +90,9 @@ class App extends Component {
           <Route path="/dashboard" render={(props)=> <Dashboard addNewJobs = {this.addNewJobs} 
               deleteJobs = {this.deleteJobs} jobList={this.state.jobs} username = {this.state.username} />} />
           <Route path="/activity" component = { Activity }/>
-          <Route path="/secondboard" render={(props)=> <Secondboard addNewJobs = {this.addNewJobs} 
-              deleteJobs = {this.deleteJobs} jobList={this.state.jobs} username = {this.state.username} />} />
+          <Route path="/thirdboard" render={(props)=> <Thirdboard addNewJobs = {this.addNewJobs} 
+              deleteJobs = {this.deleteJobs} jobList={this.state.jobs} 
+              editJobs = {this.editJobs} username = {this.state.username} />} />
         </div>
       </Router>
     );

@@ -18,7 +18,9 @@ const CardContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  margin-top: 25px;
+  margin-top: 25px; 
+  
+}
 `
 
 const Secondboard = () => {

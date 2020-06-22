@@ -8,8 +8,9 @@ const Navbar = (props) => {
         <a className="brand-logo">Trackr.</a>
         <ul className="right">
           <li><Link to="/">Homepage</Link></li>
-          <li><Link to="/dashboard">Dashboard</Link></li>
+          {/*<li><Link to="/dashboard">Dashboard</Link></li>*/}
           <li><Link to="/activity">Activity</Link></li>
+          <li><Link to="/thirdboard">Board</Link></li>
           <li><Link to="/login" className="waves-effect waves-light btn-small" onClick={props.logOut}>LOGOUT</Link></li>
           <li>Welcome, {localStorage.getItem('username') } </li>
         </ul>
