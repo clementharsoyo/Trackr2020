@@ -30,10 +30,10 @@ class Thirdboard extends Component {
         console.log(newJobData)
         this.props.editJobs(newJobData)
         const newObj = {
-            username: this.props.username,
-            add: false,
+            username: localStorage.getItem('username'),
+            updated: true,
             updatedJob: this.props.jobList.find((job) => {
-                if (job.id === id) {
+                if (job.company === id) {
                     return true
                 }
             }),
@@ -41,6 +41,7 @@ class Thirdboard extends Component {
                 jobs: newJobData
             }
         }
+        console.log(newObj)
         axios.put("http://localhost:5000/api/users/", newObj)
     }
 

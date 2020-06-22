@@ -58,7 +58,7 @@ class App extends Component {
       jobs: filteredJobs
     })
     const newObj = {
-      username: this.state.username,
+      username: localStorage.getItem('username'),
       delete: true,
       updatedJob: deletedJob,
       update: {
