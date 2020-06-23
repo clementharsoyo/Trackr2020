@@ -69,7 +69,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:5000/api/users/", { data : { username : localStorage.getItem('username') } })
+    axios.get("http://localhost:5000/api/users/" + localStorage.getItem('username'))
     .then(response => {
       this.setState({
         jobs: response.data.jobs
