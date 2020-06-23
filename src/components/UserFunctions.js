@@ -10,6 +10,8 @@ export const register = (newUser) => {
             email: newUser.email
         })
         .then(response => {
+            localStorage.setItem('usertoken', response.data)
+            localStorage.setItem('username', response.data.username)
             console.log("Registered")
         })
 }

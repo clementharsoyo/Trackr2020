@@ -1,7 +1,10 @@
 import React , { Component } from 'react'
 import "./Thirdboard.css"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { trash } from "@fortawesome/free-solid-svg-icons";
 import AddJobs from "../AddJobs.js"
 import axios from 'axios'
+
 
 class Thirdboard extends Component {
 
@@ -20,9 +23,9 @@ class Thirdboard extends Component {
 
     onDrop = (e, newStatus) => {
         let id = e.dataTransfer.getData("id")
-        console.log('dropped', id)
+        console.log('dropped' + id)
         let newJobData = this.props.jobList.filter((job) => {
-            if (job.company === id) {
+            if (job.id === id) {
                 job.status = newStatus
             }
             return job
@@ -33,7 +36,7 @@ class Thirdboard extends Component {
             username: localStorage.getItem('username'),
             updated: true,
             updatedJob: this.props.jobList.find((job) => {
-                if (job.company === id) {
+                if (job.id === id) {
                     return true
                 }
             }),
@@ -64,13 +67,11 @@ class Thirdboard extends Component {
             jobData[job.status].push(
                 <div key={job.id}
                     draggable
-                    onDragStart={(e) => this.onDragStart(e, job.company)}
-                    className="card">
-                    {job.company}, {job.role}
-                    <button
-                        onClick={() => this.props.deleteJobs(job.id)} type="submit" name="action">
-                        <i class="material-icons tiny right">clear</i>
-                    </button>
+                    onDragStart={(e) => this.onDragStart(e, job.id)}
+                    className="jobcard">
+                    <p className="jobcard-title"> {job.company} </p>
+                    <p className="jobcard-content"> {job.role} </p>
+                    <i class="tiny material-icons right"  onClick={() => this.props.deleteJobs(job.id)}>delete</i>               
                 </div>
             );
         });

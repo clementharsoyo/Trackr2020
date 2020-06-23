@@ -28,7 +28,6 @@ class AddJobs extends Component {
             company: this.state.company,
             role: this.state.role,
             status: this.state.status,
-            schedule: this.state.schedule,
             interviewDate: new Date(this.state.schedule + "T" + this.state.time + ":00.000Z")
         }
         console.log(newJob)

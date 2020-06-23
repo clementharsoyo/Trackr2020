@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Navbar = (props) => {
   return ( localStorage.getItem('usertoken') ? 
-    <nav className="nav-wrapper blue darken-4">
+    <nav className="nav-wrapper teal darken-4">
       <div className="container">
         <a className="brand-logo">Trackr.</a>
         <ul className="right">
