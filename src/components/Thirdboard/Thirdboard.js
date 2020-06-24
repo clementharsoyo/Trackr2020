@@ -3,13 +3,15 @@ import "./Thirdboard.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { trash } from "@fortawesome/free-solid-svg-icons";
 import AddJobs from "../AddJobs.js"
+import EditJobs from "../EditJobs.js"
+import Thirdcard from "./Thirdcard.js"
 import axios from 'axios'
 
 
 class Thirdboard extends Component {
 
     state = {
-        showForm: false
+        showForm: false,
     }
 
     onDragStart = (e, id) => {
@@ -53,7 +55,7 @@ class Thirdboard extends Component {
             showForm: !this.state.showForm
         })
     }
-    
+
     render() {
         
         let jobData = {
@@ -63,7 +65,7 @@ class Thirdboard extends Component {
             offer: []
         }
         
-        this.props.jobList.forEach(job => {
+        /* this.props.jobList.forEach(job => {
             jobData[job.status].push(
                 <div key={job.id}
                     draggable
@@ -71,9 +73,24 @@ class Thirdboard extends Component {
                     className="jobcard">
                     <p className="jobcard-title"> {job.company} </p>
                     <p className="jobcard-content"> {job.role} </p>
-                    <i class="tiny material-icons right"  onClick={() => this.props.deleteJobs(job.id)}>delete</i>               
+                    <i class="tiny material-icons right"  onClick={() => this.props.deleteJobs(job.id)}>delete</i>
+                    <i class="tiny material-icons left" onClick={()=> this.toggleEditForm}>border_color</i>
+                    {this.state.editForm ? 
+                    <EditJobs editExistingJob={this.props.editExistingJob} closeEditForm={this.toggleEditForm}
+                            username={this.props.username} company={job.company}
+                    />
+                    : null}              
                 </div>
             );
+        }); */
+
+        this.props.jobList.forEach(job => {
+            if (job.company) {
+            jobData[job.status].push(
+                <Thirdcard key={job.id} job={job} deleteJobs={this.props.deleteJobs} editExistingJob={this.props.editExistingJob}
+                />
+            );
+            }
         });
         
         return(

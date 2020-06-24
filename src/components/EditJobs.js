@@ -3,14 +3,14 @@ import axios from 'axios';
 import "./Thirdboard/Thirdboard.css"
 import M from "materialize-css"
 
-class AddJobs extends Component {
+class EditJobs extends Component {
     state = {
-        company: '',
-        role: '',
-        status: '',
+        company: this.props.job.company,
+        role: this.props.job.role,
+        status: this.props.job.status,
         schedule: '',
         time: '',
-        errors: []
+        id: this.props.job.id
     };
 
     handleChange = (e) => {
@@ -25,36 +25,32 @@ class AddJobs extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const newJob = {
+        const editedJob = {
             company: this.state.company,
             role: this.state.role,
             status: this.state.status,
             interviewDate: this.state.schedule + "T" + this.state.time,
+            id: this.state.id
         }
-        console.log(newJob)
-        const newArr = this.props.addNewJobs(newJob) 
+        console.log(editedJob)
+        const newArr = this.props.editExistingJob(editedJob) 
         const newObj = {
             username: localStorage.getItem('username'),
-            add: true,
-            updatedJob: newJob,
+            update: true,
+            updatedJob: editedJob,
             update: {
                 jobs: newArr
             }
         }
         axios.put("http://localhost:5000/api/users/", newObj)
-            .then(res => {console.log(res.data)})
-            .catch(err => { 
-                this.setState({
-                    errors: err.response.data
-                }) 
-            })
-        this.props.closePopup()
+        this.props.closeEditForm()
         this.setState({
             company: '',
             role: '',
             status: '',
             schedule: '',
             time: '',
+            id: ''
         })
     }
 
@@ -73,15 +69,13 @@ class AddJobs extends Component {
                             <i className="material-icons prefix">work</i>
                             <input id="company" type="text" className="validate"
                                 name="company" value={this.state.company} onChange={this.handleChange} autoComplete="off"/>
-                            <label htmlFor="company">Company</label>
-                            <p style={{color: "#a82424"}}>{ this.state.errors.company } </p>
+                            <label htmlFor="company"></label>
                         </div>
                         <div className="input-field col s12">
                             <i className="material-icons prefix">person</i>
                             <input id="role" type="text" className="validate" 
                                 name="role" value={this.state.role} onChange={this.handleChange} autoComplete="off"/>
-                            <label htmlFor="role">Role</label>
-                            <p style={{color: "#a82424"}}>{ this.state.errors.role } </p>
+                            <label htmlFor="role"></label>
                         </div>
                         <div className="input-field col s12">
                             <i className="material-icons prefix">sms</i>
@@ -94,7 +88,6 @@ class AddJobs extends Component {
                                 <option value="offer">Offer</option>
                             </select>
                             <label htmlFor="status"></label>
-                            <p style={{color: "#a82424"}}>{ this.state.errors.status } </p>
                         </div>
                         <div className="input-field col s6">
                             <i className="material-icons prefix">access_alarm</i>
@@ -111,8 +104,8 @@ class AddJobs extends Component {
                             <label htmlFor="time"></label>
                         </div>
                     </div>
-                    <button className="FormField__Button waves-effect waves-light mr-20" type="Submit">Add</button>
-                    <button onClick={this.props.closePopup}>
+                    <button className="FormField__Button waves-effect waves-light mr-20" type="Submit">Edit</button>
+                    <button onClick={this.props.closeEditForm}>
                         <i class="material-icons tiny">clear</i>
                     </button>
                 </form>
@@ -123,4 +116,4 @@ class AddJobs extends Component {
     }
 }
 
-export default AddJobs
+export default EditJobs

@@ -45,6 +45,18 @@ class App extends Component {
     return newJobsArray
   }
 
+  editExistingJob = (editedJob) => {
+    const filteredJobs = this.state.jobs.filter(job => {
+      return job.id !== editedJob.id
+    })
+    let newJobsArray = [...filteredJobs, editedJob]
+    console.log(newJobsArray)
+    this.setState({
+      jobs: newJobsArray
+    })
+    return newJobsArray
+  }
+  
   deleteJobs = (id) => {
     console.log(this.state.jobs)
     const deletedJob = this.state.jobs.find(job => {
@@ -69,7 +81,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:5000/api/users/", { data : { username : localStorage.getItem('username') } })
+    axios.get("http://localhost:5000/api/users/" + localStorage.getItem('username'))
     .then(response => {
       this.setState({
         jobs: response.data.jobs
@@ -91,7 +103,7 @@ class App extends Component {
               deleteJobs = {this.deleteJobs} jobList={this.state.jobs} username = {this.state.username} />} />
           <Route path="/activity" component = { Activity }/>
           <Route path="/thirdboard" render={(props)=> <Thirdboard addNewJobs = {this.addNewJobs} 
-              deleteJobs = {this.deleteJobs} jobList={this.state.jobs} 
+              deleteJobs = {this.deleteJobs} jobList={this.state.jobs} editExistingJob={this.editExistingJob}
               editJobs = {this.editJobs} username = {this.state.username} />} />
         </div>
       </Router>
