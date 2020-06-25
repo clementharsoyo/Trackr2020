@@ -35,12 +35,7 @@ class EditJobs extends Component {
         console.log(editedJob)
         const newArr = this.props.editExistingJob(editedJob) 
         const newObj = {
-<<<<<<< HEAD
             update: true,
-=======
-            username: localStorage.getItem('username'),
-            updated: true,
->>>>>>> 4336f00aee1e84a061d197839856a0b38d388692
             updatedJob: editedJob,
             update: {
                 jobs: newArr
