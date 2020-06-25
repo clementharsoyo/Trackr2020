@@ -159,3 +159,10 @@
   margin-right: 100px;
   cursor: pointer;
 }
+
+.password-iconUp {
+  position: absolute;
+  margin-top: 10px;
+  margin-right: 100px;
+  cursor: pointer;
+}

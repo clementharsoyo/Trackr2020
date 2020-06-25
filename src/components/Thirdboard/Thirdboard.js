@@ -12,6 +12,7 @@ class Thirdboard extends Component {
 
     state = {
         showForm: false,
+        jobs: []
     }
 
     onDragStart = (e, id) => {
@@ -26,18 +27,29 @@ class Thirdboard extends Component {
     onDrop = (e, newStatus) => {
         let id = e.dataTransfer.getData("id")
         console.log('dropped' + id)
-        let newJobData = this.props.jobList.filter((job) => {
+        /*let newJobData = this.props.jobList.filter((job) => {
+            if (job.id === id) {
+                job.status = newStatus
+            }
+            return job
+        })*/
+        let newJobData = this.state.jobs.filter((job) => {
             if (job.id === id) {
                 job.status = newStatus
             }
             return job
         })
         console.log(newJobData)
-        this.props.editJobs(newJobData)
+        /*this.props.editJobs(newJobData)*/
+        this.editJobs(newJobData)
         const newObj = {
-            username: localStorage.getItem('username'),
             updated: true,
-            updatedJob: this.props.jobList.find((job) => {
+            /*updatedJob: this.props.jobList.find((job) => {
+                if (job.id === id) {
+                    return true
+                }
+            }),*/
+            updatedJob: this.state.jobs.find((job) => {
                 if (job.id === id) {
                     return true
                 }
@@ -55,6 +67,69 @@ class Thirdboard extends Component {
             showForm: !this.state.showForm
         })
     }
+
+    deleteJobs = (id) => {
+        console.log(this.state.jobs)
+        const deletedJob = this.state.jobs.find(job => {
+          return job.id === id
+        })
+        console.log(deletedJob)
+        const filteredJobs = this.state.jobs.filter(job => {
+          return job.id !== id
+        });
+        this.setState({
+          jobs: filteredJobs
+        })
+        const newObj = {
+          delete: true,
+          updatedJob: deletedJob,
+          update: {
+              jobs: filteredJobs
+          }
+        }
+        axios.put("http://localhost:5000/api/users/", newObj)
+      }
+
+      editExistingJob = (editedJob) => {
+        const filteredJobs = this.state.jobs.filter(job => {
+          return job.id !== editedJob.id
+        })
+        let newJobsArray = [...filteredJobs, editedJob]
+        console.log(newJobsArray)
+        this.setState({
+          jobs: newJobsArray
+        })
+        return newJobsArray
+      }
+
+      addNewJobs = (newJob) => {
+        newJob.id = Math.random().toString()
+        let newJobsArray = [...this.state.jobs, newJob]
+        this.setState({
+          jobs: newJobsArray
+        })
+        return newJobsArray
+      }
+
+      editJobs = (arr) => {
+        this.setState({
+          ...this.state,
+          jobs: arr
+        })
+      }
+
+    componentDidMount() {
+        axios.defaults.headers.common["authorization"] = localStorage.getItem('authtoken')
+        axios.get("http://localhost:5000/api/users/")
+        .then(response => {
+          this.setState({
+            jobs: response.data.jobs
+          })
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      } 
 
     render() {
         
@@ -84,10 +159,19 @@ class Thirdboard extends Component {
             );
         }); */
 
-        this.props.jobList.forEach(job => {
+        /*this.props.jobList.forEach(job => {
             if (job.company) {
             jobData[job.status].push(
                 <Thirdcard key={job.id} job={job} deleteJobs={this.props.deleteJobs} editExistingJob={this.props.editExistingJob}
+                />
+            );
+            }
+        });*/
+
+        this.state.jobs.forEach(job => {
+            if (job.company) {
+            jobData[job.status].push(
+                <Thirdcard key={job.id} job={job} deleteJobs={this.deleteJobs} editExistingJob={this.editExistingJob}
                 />
             );
             }
@@ -140,8 +224,13 @@ class Thirdboard extends Component {
                                 + Add job
                             </button>
                         </div>
-                        {this.state.showForm ? 
+                        {/*{this.state.showForm ? 
                         <AddJobs addNewJobs={this.props.addNewJobs} closePopup={this.togglePopup}
+                            username={this.props.username}
+                        />
+                        : null}*/}
+                        {this.state.showForm ? 
+                        <AddJobs addNewJobs={this.addNewJobs} closePopup={this.togglePopup}
                             username={this.props.username}
                         />
                         : null}

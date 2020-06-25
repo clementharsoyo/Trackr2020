@@ -14,6 +14,9 @@ export const register = (newUser) => {
             localStorage.setItem('username', response.data.username)
             console.log("Registered")
         })
+        .catch(err => {
+            console.log(err.response.data)
+        })
 }
 
 /* Register function, will post the data accepted from user input into

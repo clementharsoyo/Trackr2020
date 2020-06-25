@@ -80,8 +80,19 @@ class App extends Component {
     axios.put("http://localhost:5000/api/users/", newObj)
   }
 
+  async getNewAuthToken() {
+    axios.defaults.headers.common["authorization"] = localStorage.getItem('authtoken')
+    const newToken = axios.post("http://localhost:5000/api/users/refreshAuthToken").catch(err => {console.log(err)})
+    localStorage.setItem('authtoken', newToken.authToken)
+  }
+
   componentDidMount() {
-    axios.get("http://localhost:5000/api/users/" + localStorage.getItem('username'))
+    setInterval(this.getNewAuthToken, 110000)
+  }
+
+  /*componentDidMount() {
+    axios.defaults.headers.common["authorization"] = localStorage.getItem('authtoken')
+    axios.get("http://localhost:5000/api/users/")
     .then(response => {
       this.setState({
         jobs: response.data.jobs
@@ -90,7 +101,7 @@ class App extends Component {
     .catch(error => {
       console.log(error)
     })
-  } 
+  }*/
   
   render() {
     return (

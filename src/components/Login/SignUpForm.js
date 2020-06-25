@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { register } from '../UserFunctions.js'
+/*import { register } from '../UserFunctions.js'*/
+import axios from 'axios'
 
 class SignUpForm extends Component {
     
@@ -13,6 +14,29 @@ class SignUpForm extends Component {
         email: '',
         errors: []
     };
+
+    register = (newUser) => {
+        return axios
+            .post("http://localhost:5000/api/users/" + "signup", { 
+                username: newUser.username,
+                password: newUser.password,
+                email: newUser.email
+            })
+            .then(response => {
+                localStorage.setItem('usertoken', response.data)
+                localStorage.setItem('refreshtoken', response.data.refreshToken)
+                localStorage.setItem('authtoken', response.data.authToken)
+                localStorage.setItem('username', response.data.user.username)
+                axios.defaults.headers.common["authorization"] = response.data.authToken
+                return response.data
+            })
+            .catch(err => {
+                this.setState({
+                    errors: err.response.data
+                })
+                console.log(err.response.data)
+            })
+    }
 
     /* When filling the form, will update the state to accept 
         user input */
@@ -37,18 +61,14 @@ class SignUpForm extends Component {
             password: this.state.password,
             email: this.state.email
         }
-        register(newUser).then(resp => {
+        this.register(newUser).then(resp => {
+            if (resp) {
             console.log("Registered")
             this.props.changeState(newUser.username)
             this.props.history.push({
                 pathname: "/",
             })
-        })
-        .catch(err => {
-            this.setState({
-                errors: err.response.data
-            })
-            console.log(err.response.data)
+            } 
         })
     }
 

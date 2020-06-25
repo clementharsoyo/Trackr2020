@@ -8,8 +8,8 @@ class EditJobs extends Component {
         company: this.props.job.company,
         role: this.props.job.role,
         status: this.props.job.status,
-        schedule: '',
-        time: '',
+        schedule: this.props.job.interviewDate.split("T")[0],
+        time: this.props.job.interviewDate.split("T")[1],
         id: this.props.job.id
     };
 
@@ -35,7 +35,6 @@ class EditJobs extends Component {
         console.log(editedJob)
         const newArr = this.props.editExistingJob(editedJob) 
         const newObj = {
-            username: localStorage.getItem('username'),
             update: true,
             updatedJob: editedJob,
             update: {

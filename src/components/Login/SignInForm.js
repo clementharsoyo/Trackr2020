@@ -22,7 +22,10 @@ class SignInForm extends Component {
             })
             .then(response => {
                 localStorage.setItem('usertoken', response.data)
+                localStorage.setItem('refreshtoken', response.data.refreshToken)
+                localStorage.setItem('authtoken', response.data.authToken)
                 localStorage.setItem('username', response.data.user.username)
+                axios.defaults.headers.common["authorization"] = response.data.authToken
                 return response.data
             })
             .catch(err => {

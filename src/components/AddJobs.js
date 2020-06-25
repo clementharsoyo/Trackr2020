@@ -34,7 +34,6 @@ class AddJobs extends Component {
         console.log(newJob)
         const newArr = this.props.addNewJobs(newJob) 
         const newObj = {
-            username: localStorage.getItem('username'),
             add: true,
             updatedJob: newJob,
             update: {
