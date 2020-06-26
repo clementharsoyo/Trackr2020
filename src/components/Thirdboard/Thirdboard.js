@@ -1,9 +1,6 @@
 import React , { Component } from 'react'
 import "./Thirdboard.css"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { trash } from "@fortawesome/free-solid-svg-icons";
 import AddJobs from "../AddJobs.js"
-import EditJobs from "../EditJobs.js"
 import Thirdcard from "./Thirdcard.js"
 import axios from 'axios'
 
@@ -50,16 +47,12 @@ class Thirdboard extends Component {
                 }
             }),*/
             updatedJob: this.state.jobs.find((job) => {
-                if (job.id === id) {
-                    return true
-                }
+                return job.id === id
             }),
-            update: {
-                jobs: newJobData
-            }
+            jobs: newJobData
         }
         console.log(newObj)
-        axios.put("http://localhost:5000/api/users/", newObj)
+        axios.put("http://localhost:5000/api/users/jobs", newObj)
     }
 
     togglePopup = () => {
@@ -83,11 +76,9 @@ class Thirdboard extends Component {
         const newObj = {
           delete: true,
           updatedJob: deletedJob,
-          update: {
-              jobs: filteredJobs
-          }
+          jobs: filteredJobs
         }
-        axios.put("http://localhost:5000/api/users/", newObj)
+        axios.put("http://localhost:5000/api/users/jobs", newObj)
       }
 
       editExistingJob = (editedJob) => {
@@ -127,7 +118,10 @@ class Thirdboard extends Component {
           })
         })
         .catch(error => {
-          console.log(error)
+            console.log(error)
+            if (error.status === 401) {
+                this.props.history.push("/login")
+            }
         })
       } 
 

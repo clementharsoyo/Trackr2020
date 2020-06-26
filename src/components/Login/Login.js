@@ -3,16 +3,16 @@ import { Switch, Route, NavLink } from 'react-router-dom';
 import SignUpForm from './SignUpForm';
 import SignInForm from './SignInForm';
 import Logo from './logo.png';
-import '../../App.css';
+import './Login.css';
 
 class Login extends Component {
 
     render() {
       return (
       <Switch>
-      <div className="App">
-        <div className="App__Aside">
-          <img className="centerLogo" src={Logo} height="375" width="500"/>
+      <div className="login">
+        <div className="login__Aside">
+          <img className="centerLogo" src={Logo} height="375" width="500"></img>
         </div>
         <div className="App__Form">
   

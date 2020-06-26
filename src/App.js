@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import Login from './components/Login/Login.js';
-import './App.css';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Homepage from './components/Homepage';
-import Dashboard from './components/Dashboard';
 import Activity from './components/Activity';
 import Thirdboard from './components/Thirdboard/Thirdboard';
+import VerificationPage from './components/Login/VerificationPage.js';
 import axios from 'axios';
 import 'materialize-css/dist/css/materialize.min.css';
 
@@ -82,12 +81,16 @@ class App extends Component {
 
   async getNewAuthToken() {
     axios.defaults.headers.common["authorization"] = localStorage.getItem('authtoken')
-    const newToken = axios.post("http://localhost:5000/api/users/refreshAuthToken").catch(err => {console.log(err)})
-    localStorage.setItem('authtoken', newToken.authToken)
-  }
+    return axios.post("http://localhost:5000/api/users/refreshAuthToken")
+          .then(newToken => {
+            localStorage.setItem('authtoken', newToken.data.authToken)
+            axios.defaults.headers.common["authorization"] = newToken.data.authToken
+          })
+          .catch(err => {console.log(err)})
+    }
 
   componentDidMount() {
-    setInterval(this.getNewAuthToken, 110000)
+    setInterval(this.getNewAuthToken, 897000)
   }
 
   /*componentDidMount() {
@@ -110,12 +113,11 @@ class App extends Component {
           <Navbar username={this.state.username} logOut={this.logOut}/>
           <Route exact path="/" component = { Homepage } />
           <Route path="/login" render={(props)=> <Login changeState = {this.changeState}/>} />
-          <Route path="/dashboard" render={(props)=> <Dashboard addNewJobs = {this.addNewJobs} 
-              deleteJobs = {this.deleteJobs} jobList={this.state.jobs} username = {this.state.username} />} />
           <Route path="/activity" component = { Activity }/>
           <Route path="/thirdboard" render={(props)=> <Thirdboard addNewJobs = {this.addNewJobs} 
               deleteJobs = {this.deleteJobs} jobList={this.state.jobs} editExistingJob={this.editExistingJob}
               editJobs = {this.editJobs} username = {this.state.username} />} />
+          <Route path="/verification" component = { VerificationPage }/>
         </div>
       </Router>
     );

@@ -13,6 +13,22 @@ class AddJobs extends Component {
         errors: []
     };
 
+    putNewObj = (newObj) => {
+        return axios
+                .put("http://localhost:5000/api/users/jobs", newObj)
+                .then(res => {
+                    console.log(res.data)
+                    return res.data
+                    }
+                )
+                .catch(err => { 
+                    this.setState({
+                        errors: err.response.data
+                    }) 
+                    console.log(err.response.data)
+                })
+    }
+
     handleChange = (e) => {
         let target = e.target;
         let value = target.value;
@@ -36,18 +52,14 @@ class AddJobs extends Component {
         const newObj = {
             add: true,
             updatedJob: newJob,
-            update: {
-                jobs: newArr
-            }
+            jobs: newArr
         }
-        axios.put("http://localhost:5000/api/users/", newObj)
-            .then(res => {console.log(res.data)})
-            .catch(err => { 
-                this.setState({
-                    errors: err.response.data
-                }) 
+        this.putNewObj(newObj)
+            .then(res => {
+                if (res) {
+                    this.props.closePopup()
+                }
             })
-        this.props.closePopup()
         this.setState({
             company: '',
             role: '',
@@ -110,10 +122,9 @@ class AddJobs extends Component {
                             <label htmlFor="time"></label>
                         </div>
                     </div>
-                    <button className="FormField__Button waves-effect waves-light mr-20" type="Submit">Add</button>
-                    <button onClick={this.props.closePopup}>
-                        <i class="material-icons tiny">clear</i>
-                    </button>
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Add
+                            <i class="material-icons right">send</i></button>
+                    <button onClick={this.props.closePopup} className="right btn-flat">x</button>
                 </form>
             </div>
             </div>

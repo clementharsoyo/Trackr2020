@@ -66,7 +66,7 @@ class SignUpForm extends Component {
             console.log("Registered")
             this.props.changeState(newUser.username)
             this.props.history.push({
-                pathname: "/",
+                pathname: "/verification",
             })
             } 
         })

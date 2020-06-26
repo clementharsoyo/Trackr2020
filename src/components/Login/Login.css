@@ -1,10 +1,10 @@
-.App {
+.login {
   height: 100vh;
   display: flex;
   color: white;
 }
 
-.App__Aside {
+.login__Aside {
   width: 50%;
   background-color: rgb(213, 236, 220);
 }

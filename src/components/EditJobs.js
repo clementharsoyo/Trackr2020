@@ -37,11 +37,9 @@ class EditJobs extends Component {
         const newObj = {
             update: true,
             updatedJob: editedJob,
-            update: {
-                jobs: newArr
-            }
+            jobs: newArr
         }
-        axios.put("http://localhost:5000/api/users/", newObj)
+        axios.put("http://localhost:5000/api/users/jobs", newObj)
         this.props.closeEditForm()
         this.setState({
             company: '',
@@ -103,10 +101,9 @@ class EditJobs extends Component {
                             <label htmlFor="time"></label>
                         </div>
                     </div>
-                    <button className="FormField__Button waves-effect waves-light mr-20" type="Submit">Edit</button>
-                    <button onClick={this.props.closeEditForm}>
-                        <i class="material-icons tiny">clear</i>
-                    </button>
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Edit
+                            <i class="material-icons right">send</i></button>
+                    <button onClick={this.props.closeEditForm} className="right btn-flat">x</button>
                 </form>
             </div>
             </div>

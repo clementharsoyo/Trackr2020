@@ -1,6 +1,5 @@
 import React from 'react'
 import Board from "../board.png"
-import { Link } from 'react-router-dom';
 import "./Home.css"
 
 const Homepage = (props) => {

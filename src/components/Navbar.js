@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = (props) => {
-  return ( localStorage.getItem('usertoken') ? 
+  return ( (localStorage.getItem('usertoken') && localStorage.getItem('verified')) ? 
     <nav className="nav-wrapper teal darken-4">
       <div className="container">
         <a className="brand-logo">Trackr.</a>

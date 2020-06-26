@@ -22,6 +22,7 @@ class SignInForm extends Component {
             })
             .then(response => {
                 localStorage.setItem('usertoken', response.data)
+                localStorage.setItem('verified', response.data.verified)
                 localStorage.setItem('refreshtoken', response.data.refreshToken)
                 localStorage.setItem('authtoken', response.data.authToken)
                 localStorage.setItem('username', response.data.user.username)
@@ -78,7 +79,6 @@ class SignInForm extends Component {
       };
     
     render() {
-        const { errors } = this.state;
         return(
             <div className="FormCenter">
                 <form onSubmit={this.handleSubmit} className="FormFields">
