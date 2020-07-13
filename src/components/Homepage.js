@@ -4,7 +4,6 @@ import "./Home.css"
 
 const Homepage = (props) => {
   return (
-    <div>
       <div className="container">
         <div className="row">
           <div className="col s7 push-s5"> 
@@ -16,54 +15,44 @@ const Homepage = (props) => {
               Integrate with your preferred job search engine for an even better experience.</p>
           </div>
         </div>
-        <div className="row topMargin">
-          <div className="col s4">
-            <div className="card">
-              <div className="card-image">
+        <div className="row">
+          <div class="col s4 m4 l4">
+            <div class="card center-align">
+              <div class="card-image">
                 <img src={Board} />
+                <span class="card-title" style={{color: "black"}}>Interactive</span>
               </div>
-              <div className="card-content">
-                <h4 className="center">Interactive</h4>
-                <p className="center">Organize your job search by using simple drag and drop features. 
-                  Track them on each stage or switch to calendar view whenever needed.</p>
-              </div>
-              <div className="card-action">
-                { /* <Link to="/dashboard">Try it here!</Link> */ }
+              <div class="card-content">
+                <p>I am a very simple card. I am good at containing small bits of information.
+                I am convenient because I require little markup to use effectively.</p>
               </div>
             </div>
-          </div>
-          <div className="col s4">
+        </div>
+          <div className="col s4 m4 l4">
             <div className="card">
               <div className="card-image">
                 <img src={Board} />
+                <span class="card-title" style={{color: "black"}}>Reminders</span>
               </div>
               <div className="card-content">
-                <h4 className="center">Reminders</h4>
                 <p className="center">No more missed deadline on job application. Trackr sends you reminders
                   on approaching application deadline and interview schedule.</p>
               </div>
-              <div className="card-action">
-                { /* <Link to="/dashboard">See it here!</Link> */ }
-              </div>
             </div>
           </div>
-          <div className="col s4">
+          <div className="col s4 m4 l4">
             <div className="card">
               <div className="card-image">
                 <img src={Board} />
+                <span class="card-title" style={{color: "black"}}>Integrate</span>
               </div>
               <div className="card-content">
-                <h4 className="center">Integrate</h4>
                 <p className="center">Integrate your LinkedIn account with Trackr. 
                 This way, your bookmark on LinkedIn job search will be automatically added into your board. </p>
-              </div>
-              <div className="card-action">
-                { /* <Link to="/sign-up">Integrate it here!</Link> */ }
               </div>
             </div>
           </div>
           </div>
-        </div>
         </div>
   )
 }

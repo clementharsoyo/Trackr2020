@@ -68,6 +68,10 @@ class SignInForm extends Component {
                     pathname: "/",
                 })
             }
+        }).catch(err => {
+            if (err.response.status === 401) {
+                this.props.history.push("/verification")
+            }
         })
     }
 
@@ -114,7 +118,10 @@ class SignInForm extends Component {
                     <div className="FormField">
                         <button className="FormField__Button waves-effect waves-light mr-20" type="Submit">Sign In</button>
                         <Link to="/login/signup" className="FormField__Link">New to Trackr?</Link>
-                        </div>
+                        
+                    </div>
+
+                    <Link to="/linkedin" className="FormField__Link">Sign In with LinkedIn</Link>
                 </form>
             </div>
         )

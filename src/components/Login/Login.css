@@ -166,3 +166,10 @@
   margin-right: 100px;
   cursor: pointer;
 }
+
+.sendEmail {
+  position: absolute;
+  margin-top: 10px;
+  margin-left: 175px;
+  margin-right: 25px;
+}

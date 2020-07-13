@@ -17,9 +17,9 @@ class VerificationPage extends Component {
           <img className="centerLogo" src={Logo} height="375" width="500"></img>
         </div>
         <div className="App__Form">
-            <h3>Welcome to Trackr!</h3>
-            <h5>For your own security, please verify your email by clicking the button below</h5>
-            <button class="btn waves-effect waves-light" onClick={this.sendVerificationEmail}>Verify Email
+            <h3 className="center">Welcome to Trackr!</h3>
+            <h5 className="center">For your own security, please check your email to confirm your account</h5>
+            <button className="btn waves-effect waves-light sendEmail" onClick={this.sendVerificationEmail}>Resend Verification Email
                 <i class="normal material-icons right">send</i></button>
         </div>
       </div>

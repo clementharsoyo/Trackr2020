@@ -35,7 +35,7 @@ class EditJobs extends Component {
         console.log(editedJob)
         const newArr = this.props.editExistingJob(editedJob) 
         const newObj = {
-            update: true,
+            updated: true,
             updatedJob: editedJob,
             jobs: newArr
         }
