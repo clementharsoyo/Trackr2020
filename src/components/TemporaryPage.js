@@ -38,12 +38,17 @@ class TemporaryPage extends Component {
                         this.props.history.go(0)
                         }, 2000)
                     } else {
+                        localStorage.setItem('refreshtoken', refreshToken)
+                        localStorage.setItem('authtoken', authToken)
                         this.props.history.push("/usernameForm")
                     }
                 }
             })
             .catch(err => {
                 console.log(err)
+                if (localStorage.getItem('authToken')) {
+                    axios.defaults.headers.common["authorization"] = localStorage.getItem('authToken')
+                }
             })
             /* axios.get("http://localhost:5000/api/users/")
             .then(res => {

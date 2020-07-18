@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import linkedInSignIn from "./SignInLinkedIn.png"
 /* import { login } from "../UserFunctions.js" */
 import axios from 'axios'
 
@@ -67,9 +68,10 @@ class SignInForm extends Component {
                 this.props.history.push({
                     pathname: "/",
                 })
+                this.props.history.go(0)
             }
         }).catch(err => {
-            if (err.response.status === 401) {
+            if (err.response === 401) {
                 this.props.history.push("/verification")
             }
         })
@@ -116,12 +118,11 @@ class SignInForm extends Component {
 
                     {/* Sign In Button */}
                     <div className="FormField">
-                        <button className="FormField__Button waves-effect waves-light mr-20" type="Submit">Sign In</button>
-                        <Link to="/login/signup" className="FormField__Link">New to Trackr?</Link>
+                        <button className="FormField__Button waves-effect mr-20" type="Submit">Sign In</button>
+                        <Link to="/linkedin"><button className="FormField__Button2 waves-effect mr-20">Sign In with LinkedIn</button></Link>
+                        {/*<Link to="/login/signup" className="FormField__Link">New to Trackr?</Link>*/}
                         
                     </div>
-
-                    <Link to="/linkedin" className="FormField__Link">Sign In with LinkedIn</Link>
                 </form>
             </div>
         )

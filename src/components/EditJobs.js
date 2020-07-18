@@ -7,7 +7,8 @@ class EditJobs extends Component {
     state = {
         company: this.props.job.company,
         role: this.props.job.role,
-        status: this.props.job.status,
+        oldStatus: this.props.job.status,
+        status: '',
         schedule: this.props.job.interviewDate.split("T")[0],
         time: this.props.job.interviewDate.split("T")[1],
         id: this.props.job.id
@@ -28,6 +29,7 @@ class EditJobs extends Component {
         const editedJob = {
             company: this.state.company,
             role: this.state.role,
+            oldStatus: this.state.oldStatus,
             status: this.state.status,
             interviewDate: this.state.schedule + "T" + this.state.time,
             id: this.state.id
@@ -40,10 +42,12 @@ class EditJobs extends Component {
             jobs: newArr
         }
         axios.put("http://localhost:5000/api/users/jobs", newObj)
+        .catch(err => { console.log(err.response.data)})
         this.props.closeEditForm()
         this.setState({
             company: '',
             role: '',
+            oldStatus: '',
             status: '',
             schedule: '',
             time: '',

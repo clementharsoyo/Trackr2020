@@ -16,20 +16,19 @@ const Homepage = (props) => {
           </div>
         </div>
         <div className="row">
-          <div class="col s4 m4 l4">
-            <div class="card center-align">
+            <div class="card small">
               <div class="card-image">
                 <img src={Board} />
                 <span class="card-title" style={{color: "black"}}>Interactive</span>
               </div>
               <div class="card-content">
-                <p>I am a very simple card. I am good at containing small bits of information.
-                I am convenient because I require little markup to use effectively.</p>
+                <p>Organize your job search by using simple drag and drop features. 
+                  Track them on each stage or switch to calendar view whenever needed.</p>
               </div>
             </div>
         </div>
-          <div className="col s4 m4 l4">
-            <div className="card">
+        <div className="row">
+            <div className="card small">
               <div className="card-image">
                 <img src={Board} />
                 <span class="card-title" style={{color: "black"}}>Reminders</span>
@@ -39,9 +38,9 @@ const Homepage = (props) => {
                   on approaching application deadline and interview schedule.</p>
               </div>
             </div>
-          </div>
-          <div className="col s4 m4 l4">
-            <div className="card">
+        </div>
+        <div className="row">
+            <div className="card small">
               <div className="card-image">
                 <img src={Board} />
                 <span class="card-title" style={{color: "black"}}>Integrate</span>
@@ -51,9 +50,8 @@ const Homepage = (props) => {
                 This way, your bookmark on LinkedIn job search will be automatically added into your board. </p>
               </div>
             </div>
-          </div>
-          </div>
         </div>
+      </div>
   )
 }
 

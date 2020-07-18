@@ -113,9 +113,10 @@ class Thirdboard extends Component {
         axios.defaults.headers.common["authorization"] = localStorage.getItem('authtoken')
         axios.get("http://localhost:5000/api/users/")
         .then(response => {
-          this.setState({
-            jobs: response.data.jobs
-          })
+            console.log(response.data.jobs)
+            this.setState({
+                jobs: response.data.jobs
+            })
         })
         .catch(error => {
             console.log(error)

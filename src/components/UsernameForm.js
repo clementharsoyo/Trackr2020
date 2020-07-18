@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './UsernameCSS.css'
 import axios from 'axios'
 
 class UsernameForm extends Component {
@@ -28,11 +27,12 @@ class UsernameForm extends Component {
             console.log("Success")
             localStorage.setItem('usertoken', res.data)
             localStorage.setItem('verified', res.data.verified)
-            localStorage.setItem('username', res.data.username)
+            localStorage.setItem('username', this.state.username)
             setTimeout(() => { 
                 this.props.history.push("/")
                 this.props.history.go(0)
                 }, 2000)
+                
         })
         .catch(err => {
             this.setState({

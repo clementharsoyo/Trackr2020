@@ -11,9 +11,11 @@ class Login extends Component {
       return (
       <Switch>
       <div className="login">
+        
         <div className="login__Aside">
           <img className="centerLogo" src={Logo} height="375" width="500"></img>
         </div>
+        
         <div className="App__Form">
   
           <div className="PageSwitcher">
@@ -31,7 +33,6 @@ class Login extends Component {
           
           <Route exact path="/login" render={(props)=> <SignInForm { ... props } changeState = {this.props.changeState}/>}>
           </Route>
-
         </div>
       </div>
       </Switch>

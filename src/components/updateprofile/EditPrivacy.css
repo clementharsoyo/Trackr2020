@@ -1,0 +1,14 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans);
+
+.iris {
+    background-image: url("../lpimage/profile.jpg");
+    background-repeat: no-repeat;
+    height: 100vh;
+    background-size: cover;
+    margin-top: 0;
+}
+
+div {
+    margin-top: 0;
+}
+
