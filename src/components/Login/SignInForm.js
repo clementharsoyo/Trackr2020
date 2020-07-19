@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import linkedInSignIn from "./SignInLinkedIn.png"
-/* import { login } from "../UserFunctions.js" */
 import axios from 'axios'
 
 class SignInForm extends Component {
@@ -112,6 +110,7 @@ class SignInForm extends Component {
                                 onClick={this.togglePasswordVisiblity}
                             />
                         </i>
+                        <a href="/forgotpassword" style={{color: "grey"}}>Forgot your password?</a>
                         <p style={{color: "#a82424"}}> { this.state.errors.password } </p>
                         <p style={{color: "#a82424"}}> { this.state.errors.passwordincorrect } </p>
                     </div>

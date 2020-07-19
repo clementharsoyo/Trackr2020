@@ -10,6 +10,10 @@ import EditPrivacy from './components/updateprofile/EditPrivacy';
 import EditUsername from './components/updateprofile/EditUsername';
 import EditEmail from './components/updateprofile/EditEmail';
 import EditPassword from './components/updateprofile/EditPassword';
+import ForgotPassword from './components/updateprofile/ForgotPassword';
+import NewPassword from './components/updateprofile/NewPassword';
+import ChangedEmail from './components/updateprofile/ChangedEmail';
+import SyncLinkedIn from './components/updateprofile/SyncLinkedIn';
 import Thirdboard from './components/Thirdboard/Thirdboard';
 import VerificationPage from './components/Login/VerificationPage.js';
 import UsernameForm from './components/UsernameForm.js';
@@ -68,6 +72,10 @@ class App extends Component {
           <Route path="/EditPassword" component = { EditPassword } />
           <Route path="/EditUsername" component = { EditUsername } />
           <Route path="/EditPrivacy" component = { EditPrivacy } />
+          <Route path="/forgotpassword" component = { ForgotPassword } />
+          <Route path="/newpassword" component = { NewPassword } />
+          <Route path="/changedemail" component = { ChangedEmail } />
+          <Route path="/synclinkedin" component = { SyncLinkedIn } />
           <Footer />
         </div>
       </Router>

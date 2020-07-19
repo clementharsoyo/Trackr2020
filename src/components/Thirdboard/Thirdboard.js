@@ -8,6 +8,7 @@ import axios from 'axios'
 class Thirdboard extends Component {
 
     state = {
+        weekly: false,
         showForm: false,
         jobs: []
     }
@@ -109,6 +110,46 @@ class Thirdboard extends Component {
         })
       }
 
+      getWeeklyJobs = () => {
+        axios.get("http://localhost:5000/api/users/sortedJobs?weekly=true")
+            .then(response => {             
+                this.setState({
+                    jobs: response.data.jobs,
+                    weekly: true
+                })
+            })
+          .catch(error => {
+              console.log(error.data)
+          })
+        }
+        
+        getAllJobs = () => {
+            axios.defaults.headers.common["authorization"] = localStorage.getItem('authtoken')
+            axios.get("http://localhost:5000/api/users/")
+                .then(response => {             
+                    this.setState({
+                        jobs: response.data.jobs,
+                        weekly: false,
+                    })
+                })
+                .catch(error => {
+                    console.log(error.data)
+              })
+            }
+        
+        sortJobs = () => {
+            axios.defaults.headers.common["authorization"] = localStorage.getItem('authtoken')
+            axios.get("http://localhost:5000/api/users/sortedJobs")
+                .then(response => {             
+                    this.setState({
+                        jobs: response.data.jobs,
+                    })
+                })
+                .catch(error => {
+                    console.log(error.data)
+              })
+        }
+
     componentDidMount() {
         axios.defaults.headers.common["authorization"] = localStorage.getItem('authtoken')
         axios.get("http://localhost:5000/api/users/")
@@ -124,7 +165,7 @@ class Thirdboard extends Component {
                 this.props.history.push("/login")
             }
         })
-      } 
+    } 
 
     render() {
         
@@ -134,34 +175,6 @@ class Thirdboard extends Component {
             interview: [],
             offer: []
         }
-        
-        /* this.props.jobList.forEach(job => {
-            jobData[job.status].push(
-                <div key={job.id}
-                    draggable
-                    onDragStart={(e) => this.onDragStart(e, job.id)}
-                    className="jobcard">
-                    <p className="jobcard-title"> {job.company} </p>
-                    <p className="jobcard-content"> {job.role} </p>
-                    <i class="tiny material-icons right"  onClick={() => this.props.deleteJobs(job.id)}>delete</i>
-                    <i class="tiny material-icons left" onClick={()=> this.toggleEditForm}>border_color</i>
-                    {this.state.editForm ? 
-                    <EditJobs editExistingJob={this.props.editExistingJob} closeEditForm={this.toggleEditForm}
-                            username={this.props.username} company={job.company}
-                    />
-                    : null}              
-                </div>
-            );
-        }); */
-
-        /*this.props.jobList.forEach(job => {
-            if (job.company) {
-            jobData[job.status].push(
-                <Thirdcard key={job.id} job={job} deleteJobs={this.props.deleteJobs} editExistingJob={this.props.editExistingJob}
-                />
-            );
-            }
-        });*/
 
         this.state.jobs.forEach(job => {
             if (job.company) {
@@ -171,6 +184,14 @@ class Thirdboard extends Component {
             );
             }
         });
+
+        let weeklyButton;
+
+        if (this.state.weekly === false) {
+            weeklyButton = <button onClick={this.getWeeklyJobs}>See This Week's Job Application</button>
+        } else {
+            weeklyButton = <button className="waves-effect" onClick={this.getAllJobs}>See All Job Applications</button>
+        }
         
         return(
             <div className="base board">
@@ -196,6 +217,7 @@ class Thirdboard extends Component {
                             <button onClick={this.togglePopup}>
                                 + Add job
                             </button>
+                            {weeklyButton}
                         </div>
                         <div className="board-list"
                             onDragOver= {(e) => this.onDragOver(e)}
@@ -206,6 +228,9 @@ class Thirdboard extends Component {
                             {jobData.interview}
                             <button onClick={this.togglePopup}>
                                 + Add job
+                            </button>
+                            <button onClick = {this.sortJobs}>
+                                Sort on date
                             </button>
                         </div>
                         <div className="board-list"

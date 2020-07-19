@@ -1,0 +1,36 @@
+import React, { Component } from 'react';
+import axios from 'axios'
+import "./EditPrivacy.css"
+
+class SyncLinkedIn extends Component {
+    
+    state = {
+        objectid:''
+    };
+
+    componentDidMount() {
+        axios.defaults.headers.common["authorization"] = localStorage.getItem('authtoken')
+        axios.get("http://localhost:5000/api/users/")
+        .then(res => {
+            this.setState({
+                objectid: res.data._id
+            })
+        }).catch(err => {
+            console.log(err.response)
+        })
+    }
+    
+    render() {
+        let link = "https://www.linkedin.com/oauth/v2/authorization?response_type=code&state=987654321&scope=r_liteprofile%20r_emailaddress&client_id=86zqfh241jqet5&redirect_uri=http%3A%2F%2Flocalhost%3A5000%2Fapi%2Fusers%2Flinkedin%3Fid%3D" +
+                    this.state.objectid
+        return(
+            <div class="iris row">
+                <div className="container">
+                    <a href={link}>Sync With LinkedIn</a>
+                </div>
+            </div>
+        )
+    }
+}
+
+export default SyncLinkedIn

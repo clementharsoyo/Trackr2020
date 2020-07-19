@@ -4,7 +4,8 @@ import axios from 'axios'
 class TemporaryPage extends Component {
 
     state = {
-        loggedIn: false
+        loggedIn: false,
+        error: ""
     }
 
     loginWithLinkedIn = () => {
@@ -26,6 +27,12 @@ class TemporaryPage extends Component {
         if (url.includes('?')) {
             let authToken = new URLSearchParams(window.location.search).get('authToken')
             let refreshToken = new URLSearchParams(window.location.search).get('refreshToken')
+            let errorSignIn = new URLSearchParams(window.location.search).get('error')
+            if (errorSignIn) {
+                this.setState({
+                    error: errorSignIn
+                })
+            }
             axios.defaults.headers.common["authorization"] = authToken
             this.loginWithLinkedIn()
             .then(res => {
@@ -50,53 +57,29 @@ class TemporaryPage extends Component {
                     axios.defaults.headers.common["authorization"] = localStorage.getItem('authToken')
                 }
             })
-            /* axios.get("http://localhost:5000/api/users/")
-            .then(res => {
-                Set tokens in Storage 
-                localStorage.setItem('authtoken', authToken)
-                localStorage.setItem('refreshtoken', refreshToken)
-                localStorage.setItem('username', res.data.username) 
-                Check if already have username
-                if (res.data.usernameSet) {
-                    console.log("Login Success")
-                    localStorage.setItem('usertoken', res.data)
-                    localStorage.setItem('verified', res.data.verified)
-                    this.setState({
-                        loggedIn: true
-                    })
-                    setTimeout(() => {
-                    this.props.history.push({
-                        pathname: "/",
-                    })
-                    this.props.history.go(0)
-                    }, 1500)
-                    
-                } else {
-                    this.props.history.push({
-                        pathname: "/usernameForm",
-                    })
-                }
-            })
-            .catch(err => {
-                console.log(err)
-                Set back the axios headers 
-                if (localStorage.getItem('authToken')) {
-                    axios.defaults.headers.common["authorization"] = localStorage.getItem('authToken')
-                }
-            }) */
         } else {
             console.log('No Parameters in URL');
         }
     }
 
     render() {
+        let toDisplay;
+
+        if (this.state.error !== '') {
+            toDisplay = 
+            <div className="card-action red white-text">
+                <h3>Sorry, your email has been used with Trackr</h3>
+                <h5>Please Sign In with Trackr instead</h5>
+            </div>
+        } else {
+            toDisplay = 
+            <div className="card-action red white-text">Wait Up ...</div>
+        }
         return (
             <div className="row">
                 <div className="col s12 l4 offset-l4">
                     <div className="card">
-                        <div className="card-action red white-text">
-                            <h3>Wait Up</h3>
-                        </div>
+                        {toDisplay}
                     </div>
                 </div>
             </div>

@@ -46,7 +46,7 @@ class Navbar extends Component {
         <li><a href="/editUsername">Change Username</a></li>
         <li><a href="/editPassword">Change Password</a></li>
         <li><a href="/editEmail">Change Email</a></li>
-        <li><a href="/">LinkedIn</a></li>
+        <li><a href="/SyncLinkedIn">LinkedIn</a></li>
         {/*<li class="divider" tabindex="-1"></li>
         <li><a href="/editprivacy">Privacy</a></li>*/}
       </ul>
