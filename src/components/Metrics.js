@@ -10,18 +10,14 @@ class Metrics extends Component {
     componentDidMount() {
         axios.defaults.headers.common["authorization"] = localStorage.getItem('authtoken')
         axios.get("http://localhost:5000/api/users/sortedJobs?weekly=true")
-        .then(response => {      
-            console.log("i run and work")        
+        .then(response => {       
+            console.log(response)     
             this.setState({
-            jobs: response.data.jobs
-          })
-          console.log(response.data)
+                jobs: response.data.jobs
+            })
         })
         .catch(error => {
-            console.log(error.data)
-            if (error.status === 401) {
-                this.props.history.push("/login")
-            }
+            console.log(error)
         })
     }
     
@@ -30,7 +26,6 @@ class Metrics extends Component {
             <div class="iris row">
                 <div className="container">
                     <div class="col s12 m6 l6">
-                        <p>{this.state.jobs}</p>
                     </div>
                 </div>
             </div>

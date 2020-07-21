@@ -8,7 +8,7 @@ class EditJobs extends Component {
         company: this.props.job.company,
         role: this.props.job.role,
         oldStatus: this.props.job.status,
-        status: '',
+        status: this.props.job.status,
         schedule: this.props.job.interviewDate.split("T")[0],
         time: this.props.job.interviewDate.split("T")[1],
         id: this.props.job.id

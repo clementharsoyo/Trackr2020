@@ -176,6 +176,8 @@ class Thirdboard extends Component {
             offer: []
         }
 
+        console.log(this.state.jobs)
+
         this.state.jobs.forEach(job => {
             if (job.company) {
             jobData[job.status].push(
