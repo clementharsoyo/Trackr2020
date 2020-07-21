@@ -24,9 +24,15 @@ class SyncLinkedIn extends Component {
         let link = "https://www.linkedin.com/oauth/v2/authorization?response_type=code&state=987654321&scope=r_liteprofile%20r_emailaddress&client_id=86zqfh241jqet5&redirect_uri=http%3A%2F%2Flocalhost%3A5000%2Fapi%2Fusers%2Flinkedin%3Fid%3D" +
                     this.state.objectid
         return(
-            <div class="iris row">
+            <div class="iris row" style={{marginBottom: 0}}>
                 <div className="container">
-                    <a href={link}>Sync With LinkedIn</a>
+                    <div className="col s12 l6 push-l3 center-align valign-wrapper">
+                        <div className="card">
+                            <div className="card-action blue-grey center">
+                                <a style={{color: "lightblue"}} href={link}>Sync With LinkedIn Account</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         )

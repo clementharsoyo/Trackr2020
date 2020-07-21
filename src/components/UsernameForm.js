@@ -43,11 +43,11 @@ class UsernameForm extends Component {
 
     render() {
         return(
-            <div className="bgimage">
-            <div className="row login">
+            <div className="bgimage" style={{marginBottom: 0}}>
+            <div className="row login" style={{marginBottom: 0}}>
                 <div className="col s12 l4 offset-l4">
                     <div className="card">
-                        <div className="card-action red white-text">
+                        <div className="card-action blue-grey white-text">
                             <h3>Welcome</h3>
                         </div>
                         <div className="card-content">

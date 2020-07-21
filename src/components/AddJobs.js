@@ -10,6 +10,7 @@ class AddJobs extends Component {
         status: '',
         schedule: '',
         time: '',
+        logo: '',
         errors: []
     };
 
@@ -34,39 +35,55 @@ class AddJobs extends Component {
         let value = target.value;
         let stateName = target.name;
 
-        this.setState({
+        if (stateName === 'schedule') {
+            this.setState({
+                schedule: value,
+                time: '00:00'
+            })
+        } else { 
+            this.setState({
             [stateName]: value
         })
+
+        }
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const newJob = {
-            company: this.state.company,
-            role: this.state.role,
-            status: this.state.status,
-            interviewDate: this.state.schedule + "T" + this.state.time,
-        }
-        console.log(newJob)
-        const newArr = this.props.addNewJobs(newJob) 
-        const newObj = {
-            add: true,
-            updatedJob: newJob,
-            jobs: newArr
-        }
-        this.putNewObj(newObj)
+        axios.get("http://localhost:5000/api/users/logo/" + this.state.company)
             .then(res => {
-                if (res) {
-                    this.props.closePopup()
+                this.setState({
+                    logo: res.data.logo + "?size=45"
+                })
+                const newJob = {
+                    company: this.state.company,
+                    role: this.state.role,
+                    status: this.state.status,
+                    interviewDate: this.state.schedule + "T" + this.state.time,
+                    logo: this.state.logo
                 }
+                console.log(newJob)
+                const newArr = this.props.addNewJobs(newJob) 
+                const newObj = {
+                    add: true,
+                    updatedJob: newJob,
+                    jobs: newArr
+                }
+                this.putNewObj(newObj)
+                    .then(res => {
+                        if (res) {
+                            this.props.closePopup()
+                        }
+                    })
+                this.setState({
+                    company: '',
+                    role: '',
+                    status: '',
+                    schedule: '',
+                    time: '',
+                    logo: ''
+                })
             })
-        this.setState({
-            company: '',
-            role: '',
-            status: '',
-            schedule: '',
-            time: '',
-        })
     }
 
     componentDidMount() {
@@ -74,6 +91,17 @@ class AddJobs extends Component {
     }
 
     render() {
+        let timeInput;
+        if (this.state.schedule) {
+            timeInput = 
+            <div className="input-field col s6">
+                <i className="material-icons prefix"></i>
+                <input id="time" type="time" 
+                    name="time" value={this.state.time} onChange={this.handleChange}
+                    autoComplete="off" /> 
+                <label htmlFor="time"></label>
+            </div>
+        }
         return (
             <div className='popup'>
             <div className='popup_inner'>
@@ -114,13 +142,7 @@ class AddJobs extends Component {
                                 autoComplete="off" /> 
                             <label htmlFor="schedule"></label>
                         </div>
-                        <div className="input-field col s6">
-                            <i className="material-icons prefix"></i>
-                            <input id="time" type="time" 
-                                name="time" value={this.state.time} onChange={this.handleChange}
-                                autoComplete="off" /> 
-                            <label htmlFor="time"></label>
-                        </div>
+                        {timeInput}
                     </div>
                     <button class="btn waves-effect waves-light" type="submit" name="action">Add
                             <i class="material-icons right">send</i></button>

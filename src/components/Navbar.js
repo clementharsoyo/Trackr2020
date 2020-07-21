@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import M from "materialize-css/dist/js/materialize.min.js";
 import "./Navbar.css"
+import axios from 'axios'
 
 class Navbar extends Component {
+
+  state = {
+    havePassword: ''
+  }
 
   componentDidMount() {
     document.addEventListener('DOMContentLoaded', function() {
@@ -14,9 +19,21 @@ class Navbar extends Component {
       var elems = document.querySelectorAll('.sidenav');
       var instances = M.Sidenav.init(elems, {});
     });
+
+    axios.defaults.headers.common["authorization"] = localStorage.getItem('authtoken')
+        axios.get("http://localhost:5000/api/users/")
+        .then(response => {
+            this.setState({
+                havePassword: response.data.password
+            })
+        })
   }
 
   render() {
+    let changePassword;
+    if (this.state.havePassword !== '') {
+      changePassword = <li><a href="/editPassword">Change Password</a></li>
+    } 
     return ( (localStorage.getItem('usertoken') && localStorage.getItem('verified') ) ? 
     <div>
       <nav className="blue-grey darken-4">
@@ -44,7 +61,7 @@ class Navbar extends Component {
       </ul>
       <ul id='dropdown1' class='dropdown-content'>
         <li><a href="/editUsername">Change Username</a></li>
-        <li><a href="/editPassword">Change Password</a></li>
+        {changePassword}
         <li><a href="/editEmail">Change Email</a></li>
         <li><a href="/SyncLinkedIn">LinkedIn</a></li>
         {/*<li class="divider" tabindex="-1"></li>

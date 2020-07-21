@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import "./updateprofile/EditPrivacy.css"
 
 class TemporaryPage extends Component {
 
@@ -67,16 +68,17 @@ class TemporaryPage extends Component {
 
         if (this.state.error !== '') {
             toDisplay = 
-            <div className="card-action red white-text">
-                <h3>Sorry, your email has been used with Trackr</h3>
+            <div className="card-action blue-grey lighten-5 black-text">
+                <h5>Sorry, your email has been used with Trackr</h5>
                 <h5>Please Sign In with Trackr instead</h5>
             </div>
         } else {
             toDisplay = 
-            <div className="card-action red white-text">Wait Up ...</div>
+            <div className="card-action blue-grey lighten-5 black-text">Wait Up ...</div>
         }
+
         return (
-            <div className="row">
+            <div className="iris row" style={{marginBottom: 0}}>
                 <div className="col s12 l4 offset-l4">
                     <div className="card">
                         {toDisplay}

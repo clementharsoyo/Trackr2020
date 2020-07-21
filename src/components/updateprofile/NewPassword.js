@@ -45,7 +45,7 @@ class NewPassword extends Component {
     
     render() {
         return(
-            <div class="iris row">
+            <div class="iris row" style={{marginBottom: 0}}>
                 <div className="container">
                     <div className="col s12 l6 push-l3">
                         <div className="card">

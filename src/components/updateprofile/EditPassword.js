@@ -43,11 +43,11 @@ class EditPassword extends Component {
     
     render() {
         return( (this.state.successMessage === '') ? 
-            <div class="iris row">
+            <div class="iris row" style={{marginBottom: 0}}>
                 <div className="container">
-                    <div className="col s12 l6 push-l3">
+                    <div className="col s12 l6 push-l3 valign-wrapper">
                         <div className="card">
-                            <div className="card-action blue-grey lighten-5 black-text">
+                            <div className="card-action blue-grey lighten-5 center">
                                 <h3>Change Password</h3>
                             </div>
                             <div className="card-content">
@@ -73,7 +73,7 @@ class EditPassword extends Component {
                 </div>
             </div>
             :
-            <div class="iris row">
+            <div class="iris row" style={{marginBottom: 0}}>
                 <div className="container">
                     <div className="col s12 l6 push-l3">
                         <div className="card">

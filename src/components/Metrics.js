@@ -23,7 +23,7 @@ class Metrics extends Component {
     
     render() {
         return(
-            <div class="iris row">
+            <div class="iris row" style={{marginBottom: 0}}>
                 <div className="container">
                     <div class="col s12 m6 l6">
                     </div>
