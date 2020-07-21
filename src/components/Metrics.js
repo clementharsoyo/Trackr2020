@@ -22,10 +22,30 @@ class Metrics extends Component {
     }
     
     render() {
+        let weeklyJobs = []
+        this.state.jobs.forEach(job => {
+            weeklyJobs.push(
+                <div class="col s12 m8 offset-m2 l6 offset-l3">
+                    <div class="card-panel grey lighten-5 z-depth-1">
+                        <div class="row valign-wrapper">
+                            <div class="col s4">
+                                <img src={job.logo}/>
+                            </div>
+                            <div class="col s8">
+                                <span class="black-text">
+                                {job.company}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        })
         return(
             <div class="iris row" style={{marginBottom: 0}}>
                 <div className="container">
                     <div class="col s12 m6 l6">
+                    {weeklyJobs}
                     </div>
                 </div>
             </div>

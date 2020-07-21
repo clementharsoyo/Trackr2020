@@ -28,12 +28,16 @@ class Thirdcard extends Component {
             } else {
                 schedule = <p className="jobcard-content"> Apply by: Date is empty </p>
             }
+            let logourl;
+            if (this.props.job.logo) {
+                logourl = <img src={this.props.job.logo} style={{float: "right", borderRadius: "70%"}} />
+            }
         return(
         <div key={this.props.job.id}
         draggable
         onDragStart={(e) => this.onDragStart(e, this.props.job.id)}
         className="jobcard-toApply">
-        <p className="jobcard-title"> <img src={this.props.job.logo} style={{float: "right", borderRadius: "70%"}} /> {this.props.job.company} </p>
+        <p className="jobcard-title"> {logourl} {this.props.job.company} </p>
         <p className="jobcard-content"> {this.props.job.role} </p>
         {schedule}
         <i className="tiny material-icons right"  onClick={() => this.props.deleteJobs(this.props.job.id)}>delete</i>

@@ -6,7 +6,8 @@ import axios from 'axios'
 class Navbar extends Component {
 
   state = {
-    havePassword: ''
+    havePassword: '',
+    linkedInID: ''
   }
 
   componentDidMount() {
@@ -24,16 +25,26 @@ class Navbar extends Component {
         axios.get("http://localhost:5000/api/users/")
         .then(response => {
             this.setState({
-                havePassword: response.data.password
+                havePassword: response.data.password,
+                linkedInID: response.data.linkedInID
             })
         })
   }
 
   render() {
     let changePassword;
-    if (this.state.havePassword !== '') {
+    if (this.state.havePassword) {
       changePassword = <li><a href="/editPassword">Change Password</a></li>
     } 
+
+    let linkedInID;
+    if (this.state.linkedInID) {
+      linkedInID = <li><a href="/SyncLinkedIn">LinkedIn</a></li>
+    } else {
+      linkedInID = 
+      <li><a href="#"><i className="material-icons tiny right">check</i>LinkedIn</a></li>
+    }
+
     return ( (localStorage.getItem('usertoken') && localStorage.getItem('verified') ) ? 
     <div>
       <nav className="blue-grey darken-4">
@@ -63,9 +74,7 @@ class Navbar extends Component {
         <li><a href="/editUsername">Change Username</a></li>
         {changePassword}
         <li><a href="/editEmail">Change Email</a></li>
-        <li><a href="/SyncLinkedIn">LinkedIn</a></li>
-        {/*<li class="divider" tabindex="-1"></li>
-        <li><a href="/editprivacy">Privacy</a></li>*/}
+        {linkedInID}
       </ul>
     </div>
     :

@@ -29,9 +29,10 @@ class EditJobs extends Component {
         e.preventDefault();
         axios.get("http://localhost:5000/api/users/logo/" + this.state.company)
             .then(res => {
-                this.setState({
-                    logo: res.data.logo + "?size=45"
-                })
+                if (res.data.logo) {
+                    this.setState({
+                        logo: res.data.logo + "?size=45"
+                    })}
                 const editedJob = {
                     company: this.state.company,
                     role: this.state.role,
@@ -110,14 +111,14 @@ class EditJobs extends Component {
                             </select>
                             <label htmlFor="status"></label>
                         </div>
-                        {timeInput}
                         <div className="input-field col s6">
-                            <i className="material-icons prefix"></i>
-                            <input id="time" type="time" 
-                                name="time" value={this.state.time} onChange={this.handleChange}
+                            <i className="material-icons prefix">access_alarm</i>
+                            <input id="schedule" type="date" 
+                                name="schedule" value={this.state.schedule} onChange={this.handleChange}
                                 autoComplete="off" /> 
-                            <label htmlFor="time"></label>
+                            <label htmlFor="schedule"></label>
                         </div>
+                        {timeInput}
                     </div>
                     <button class="btn waves-effect waves-light" type="submit" name="action">Edit
                             <i class="material-icons right">send</i></button>
