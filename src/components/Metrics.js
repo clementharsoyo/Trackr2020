@@ -64,7 +64,7 @@ class Metrics extends Component {
                             <div className="card-content">
                             <Bar data={chartData} options=
                                 {{scales: {yAxes: [{ticks: {min: 0, stepSize: 1}}]}}} 
-                                width={50} height={75} />
+                                width={50} height={65} />
                             </div>
                         </div>
                     </div>

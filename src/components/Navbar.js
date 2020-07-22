@@ -88,8 +88,8 @@ class Navbar extends Component {
         <ul className="right hide-on-med-and-down">
           <li><a href="/">Homepage</a></li>
           <li><a href="/login">Board</a></li>
-          <li><a href="/">Maps</a></li>
-          <li><a href="/Metrics">Metrics</a></li>
+          <li><a href="/login">Maps</a></li>
+          <li><a href="/login">Metrics</a></li>
           <li><a href="/login">Privacy</a></li>
           <li><a href="/login">Login</a></li>
         </ul>

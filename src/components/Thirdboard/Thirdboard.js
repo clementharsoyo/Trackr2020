@@ -33,6 +33,7 @@ class Thirdboard extends Component {
         })*/
         let newJobData = this.state.jobs.filter((job) => {
             if (job.id === id) {
+                job.oldStatus = job.status
                 job.status = newStatus
             }
             return job
