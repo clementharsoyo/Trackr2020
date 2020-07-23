@@ -10,11 +10,9 @@
 }
 
 .irisWhite {
-    background-image: url("../lpimage/metricss.jpg");
     background-repeat: no-repeat;
     height: 100vh;
     background-size: cover;
-    margin-top: 0;
     margin-bottom: 0;
 }
 

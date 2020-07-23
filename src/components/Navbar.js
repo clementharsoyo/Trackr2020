@@ -56,7 +56,7 @@ class Navbar extends Component {
           <ul className="right hide-on-med-and-down">
             <li><a href="/">Homepage</a></li>
             <li><a href="/board">Board</a></li>
-            <li><a href="/">Maps</a></li>
+            <li><a href="/maps">Maps</a></li>
             <li><a href="/Metrics">Metrics</a></li>
             <li><a className="dropdown-trigger" data-target='dropdown1'>Privacy</a></li>
             {/*<li><a className="dropdown-trigger" data-target='dropdown1'>Profile</a></li>*/}

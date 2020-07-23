@@ -15,6 +15,7 @@ import ChangedEmail from './components/updateprofile/ChangedEmail';
 import SyncLinkedIn from './components/updateprofile/SyncLinkedIn';
 import SyncError from './components/updateprofile/SyncError';
 import Thirdboard from './components/Thirdboard/Thirdboard';
+import Maps from "./components/Maps"
 import VerificationPage from './components/Login/VerificationPage.js';
 import UsernameForm from './components/UsernameForm.js';
 import axios from 'axios';
@@ -55,9 +56,12 @@ class App extends Component {
   
   render() {
     return (
+      [
       <Router>
-        <div>
+          <header>
           <Navbar username={this.state.username} logOut={this.logOut}/>
+          </header>
+          <main>
           <Route exact path="/" component= { LandingPage } />
           <Route path="/login" render={(props)=> <Login changeState = {this.changeState}/>} />
           <Route path="/linkedin" component={() => { global.window && (global.window.location.href = 'https://www.linkedin.com/oauth/v2/authorization?response_type=code&state=987654321&scope=r_liteprofile%20r_emailaddress&client_id=86zqfh241jqet5&redirect_uri=http%3A%2F%2Flocalhost%3A5000%2Fapi%2Fusers%2Flinkedin');
@@ -76,9 +80,13 @@ class App extends Component {
           <Route path="/changedemail" component = { ChangedEmail } />
           <Route path="/synclinkedin" component = { SyncLinkedIn } />
           <Route path="/syncerror" component = { SyncError } />
+          <Route path="/maps" component = { Maps } />
+          </main>
+          <footer>
           <Footer />
-        </div>
+          </footer>
       </Router>
+      ]
     );
   }
 }

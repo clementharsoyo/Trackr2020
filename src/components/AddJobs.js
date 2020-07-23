@@ -2,6 +2,7 @@ import React , { Component } from 'react'
 import axios from 'axios';
 import "./Thirdboard/Thirdboard.css"
 import M from "materialize-css"
+import { GoogleComponent } from 'react-google-location'
 
 class AddJobs extends Component {
     state = {
@@ -11,6 +12,8 @@ class AddJobs extends Component {
         schedule: '',
         time: '',
         logo: '',
+        place: '',
+        coordinates: [],
         errors: []
     };
 
@@ -61,6 +64,8 @@ class AddJobs extends Component {
                     role: this.state.role,
                     status: this.state.status,
                     interviewDate: this.state.schedule + "T" + this.state.time,
+                    place: this.state.place,
+                    coordinates: this.state.coordinates,
                     logo: this.state.logo
                 }
                 console.log(newJob)
@@ -82,6 +87,8 @@ class AddJobs extends Component {
                     status: '',
                     schedule: '',
                     time: '',
+                    place: '',
+                    coordinates: [],
                     logo: ''
                 })
             })
@@ -103,18 +110,31 @@ class AddJobs extends Component {
                 <label htmlFor="time"></label>
             </div>
         }
+        const API_KEY = "AIzaSyD0VjbJ2NjXqxlmkLxO6nlmvZcH9iL4p70"
         return (
             <div className='popup'>
             <div className='popup_inner'>
             <div className="row">
                 <form className="col s12" onSubmit={this.handleSubmit}>
                     <div className="row">
-                        <div className="input-field col s12">
+                        <div className="input-field col s6">
                             <i className="material-icons prefix">work</i>
                             <input id="company" type="text" className="validate"
                                 name="company" value={this.state.company} onChange={this.handleChange} autoComplete="off"/>
                             <label htmlFor="company">Company</label>
                             <p style={{color: "#a82424"}}>{ this.state.errors.company } </p>
+                        </div>
+                        <div className="input-field col s6">
+                            <i className="material-icons prefix">location_on</i>
+                            <GoogleComponent
+                            apiKey={API_KEY}
+                            language={'en'}
+                            coordinates={true}
+                            locationBoxStyle={'custom-style'}
+                            locationListStyle={'custom-style-list'}
+                            onChange={(e) => { this.setState({ coordinates: e.coordinates,
+                                                                place: e.place }) }} 
+                            />
                         </div>
                         <div className="input-field col s12">
                             <i className="material-icons prefix">person</i>

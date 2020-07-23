@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Bar} from 'react-chartjs-2'
+import {Bar, Pie} from 'react-chartjs-2'
 import axios from 'axios'
 
 class Metrics extends Component {
@@ -36,7 +36,7 @@ class Metrics extends Component {
                 <li class="collection-item avatar">
                     <img src={job.logo} class="circle" />
                         <span class="title">{job.company} ({job.status})</span>
-                            <p>{job.role} <br />
+                            <p> {job.role} <br />
                             {job.interviewDate.split("T")[0]} [{job.interviewDate.split("T")[1]}]
                             </p>
                     <a href="/board" class="secondary-content"><i class="material-icons">grade</i></a>
@@ -68,9 +68,16 @@ class Metrics extends Component {
                             </div>
                         </div>
                     </div>
+                    <div className="col s12 m6 l6">
+                        <div className="card">
+                            <div className="card-content">
+                            <Pie data={chartData} />
+                            </div>
+                        </div>
+                    </div>
                     <div class="col s12 m6 l5 push-l1">
-                        <ul className="collection">
-                            <p style={{color: "black", fontSize: "medium"}}>What's due soon?</p>
+                        <ul className="collection with-header">
+                            <li class="collection-header"><h4>This week...</h4></li>
                             {weeklyJobs}
                         </ul>
                     </div>

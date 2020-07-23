@@ -53,7 +53,7 @@ class LandingPage extends Component {
 
                 <div className="container">
                     <div className="row">
-                        <div className="col s12 m12 l4 left-align">
+                        <div className="col s12 m12 l4 center-align">
                             <i className="large material-icons teal-text text-darken-3">developer_board</i>
                             <br></br>
                             Drag and drop feature to ease you organizing your job applications record.
@@ -67,7 +67,7 @@ class LandingPage extends Component {
                             Get your reminders sent through your email when deadline and 
                             interview is approaching.
                         </div>
-                        <div className="col s12 m12 l4 right-align">
+                        <div className="col s12 m12 l4 center-align">
                             <i className="large material-icons teal-text text-darken-3">assignment_ind</i>
                             <br></br>
                             Integrate with your professional job search account.

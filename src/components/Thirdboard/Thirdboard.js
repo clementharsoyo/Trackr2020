@@ -235,6 +235,5 @@ class Thirdboard extends Component {
         );
     }
 }
-   
 
 export default Thirdboard
