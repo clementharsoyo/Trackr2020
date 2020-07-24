@@ -7,7 +7,7 @@ class SyncError extends Component {
             <div className="iris row" style={{marginBottom: 0}}>
                 <div className="col s12 l4 offset-l4">
                     <div className="card">
-                        <div className="card-action blue-grey lighten-5 white-text">
+                        <div className="card-action blue-grey white-text">
                             <h5>Sorry, your LinkedIn Account is already with Trackr</h5>
                         </div>
                      </div>

@@ -5,6 +5,8 @@ class ForgotPassword extends Component {
     
     state = {
         username:'',
+        count: 15,
+        isButtonDisabled: false,
         errors:[]
     };
 
@@ -20,6 +22,11 @@ class ForgotPassword extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
+        this.setState({
+            isButtonDisabled: true,
+            count: 15
+          })
+        setTimeout(this.disableButton, 15000)
         axios.get("http://localhost:5000/api/users/sendPasswordRecoveryEmail/" + this.state.username)
         .catch(err => {
             this.setState({
@@ -28,7 +35,20 @@ class ForgotPassword extends Component {
         })
     }
 
+    componentDidMount() {
+        setInterval(() => {
+          this.setState({
+            count: this.state.count - 1
+          })}, 1000)
+    }
+
     render() {
+        let sendButton;
+        if (this.state.isButtonDisabled) {
+            sendButton = <button className="btn-large red">Wait {this.state.count}</button>
+        } else {
+            sendButton = <button className="btn-large red" onClick={this.handleSubmit}>Send Recovery Email</button>
+        }
         return(
             <div className="bgimage" style={{marginBottom: 0}}>
             <div className="row login" style={{marginBottom: 0}}>
@@ -46,7 +66,7 @@ class ForgotPassword extends Component {
                                 <p style={{color: "black"}}>{ this.state.errors.email} </p>
                             </div>
                             <div className="form-field center-align">
-                                <button className="btn-large red" onClick={this.handleSubmit}>Send Recovery Email</button>
+                                {sendButton}
                             </div>
                         </div>
                     </div>

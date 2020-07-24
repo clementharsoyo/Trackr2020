@@ -179,8 +179,13 @@
 }
 
 .sendEmail {
-  position: absolute;
-  margin-top: 10px;
-  margin-left: 175px;
-  margin-right: 25px;
+  position: relative;
+  margin-top: 25%;
+  margin-left: 25%;
+}
+
+.offSendEmail {
+  position: relative;
+  margin-top: 25%;
+  margin-left: 25%;
 }

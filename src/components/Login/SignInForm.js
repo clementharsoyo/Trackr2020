@@ -101,13 +101,14 @@ class SignInForm extends Component {
 
                     {/* Section for password */}
                     <div className="FormField">
-                        <label className="FormField__Label" htmlFor="password">Password</label>                            <input type={this.state.isPasswordShown ? "text" : "password"} id="password" className="FormField__Input" 
+                        <label className="FormField__Label" htmlFor="password">Password</label>                            
+                        <input type={this.state.isPasswordShown ? "text" : "password"} id="password" className="FormField__Input" 
                             placeholder="Enter your password" name="password" autoComplete="off"
                             value={this.state.password} onChange={this.handleChange}
-                            />
+                        />
                         <i>
-                            <FontAwesomeIcon icon={this.state.isPasswordShown ? faEyeSlash : faEye} className="password-icon" 
-                                onClick={this.togglePasswordVisiblity}
+                            <FontAwesomeIcon icon={this.state.isPasswordShown ? faEyeSlash : faEye} 
+                                onClick={this.togglePasswordVisiblity} className="password-icon"
                             />
                         </i>
                         <a href="/forgotpassword" style={{color: "grey"}}>Forgot your password?</a>

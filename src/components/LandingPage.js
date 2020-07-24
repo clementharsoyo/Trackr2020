@@ -98,13 +98,13 @@ class LandingPage extends Component {
                                 </div>
                             </div>
                             <div class="col s12 m12 l6">
-                                <div class="card medium">
+                                <div class="card blue-grey lighten-4">
                                     <div class="card-image">
-                                        <img />
+                                        <img className="responsive-img" src={Francis}/>
                                     </div>
                                     <div class="card-content center">
                                         <span class="card-title center"><b>Francis Hodianto</b></span>
-                                        <p><i>"Founder"</i></p>
+                                        <p><i>Founder</i></p>
                                     </div>
                                     <div class="card-action">
                                         <p> Francis is National University of Singapore undergraduate in 

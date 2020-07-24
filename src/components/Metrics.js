@@ -43,6 +43,13 @@ class Metrics extends Component {
                 </li>
             )
         })
+        if (weeklyJobs[0] !== true) {
+            weeklyJobs.push(
+                <li class="collection-item avatar">
+                   <span class="title">Nothing to worry about!</span> 
+                </li>
+            )
+        }
         let chartData;
         chartData = {
             labels: ["To Apply", "Applied", "Interview", "Offer"],

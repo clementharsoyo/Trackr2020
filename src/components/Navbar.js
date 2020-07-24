@@ -39,10 +39,9 @@ class Navbar extends Component {
 
     let linkedInID;
     if (this.state.linkedInID) {
-      linkedInID = <li><a href="/SyncLinkedIn">LinkedIn</a></li>
+      linkedInID = <li><a href="#"><i className="material-icons tiny right">check</i>LinkedIn</a></li>
     } else {
-      linkedInID = 
-      <li><a href="#"><i className="material-icons tiny right">check</i>LinkedIn</a></li>
+      linkedInID = <li><a href="/SyncLinkedIn">LinkedIn</a></li>
     }
 
     return ( (localStorage.getItem('usertoken') && localStorage.getItem('verified') ) ? 
@@ -68,9 +67,17 @@ class Navbar extends Component {
         <li><a href="/">Homepage</a></li>
         <li><a href="/board">Board</a></li>
         <li><a href="/">Maps</a></li>
+        <li><a href="/Metrics">Metrics</a></li>
+        <li><a className="dropdown-trigger" data-target='dropdown2'>Privacy</a></li>
         <li><a href="/login" onClick={this.props.logOut}>Log Out</a></li>
       </ul>
       <ul id='dropdown1' class='dropdown-content'>
+        <li><a href="/editUsername">Change Username</a></li>
+        {changePassword}
+        <li><a href="/editEmail">Change Email</a></li>
+        {linkedInID}
+      </ul>
+      <ul id='dropdown2' class='dropdown-content'>
         <li><a href="/editUsername">Change Username</a></li>
         {changePassword}
         <li><a href="/editEmail">Change Email</a></li>

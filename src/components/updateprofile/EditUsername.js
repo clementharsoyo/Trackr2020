@@ -50,7 +50,7 @@ class EditUsername extends Component {
                 <div className="container">
                     <div className="col s12 l6 push-l3 valign-wrapper">
                         <div className="card">
-                            <div className="card-action blue-grey lighten-5 center">
+                            <div className="card-action blue-grey white-text center">
                                 <h3>Change Username</h3>
                             </div>
                             <div className="card-content">

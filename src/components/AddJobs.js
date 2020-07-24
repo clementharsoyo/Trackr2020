@@ -96,6 +96,10 @@ class AddJobs extends Component {
 
     componentDidMount() {
         M.AutoInit()
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.datepicker');
+            var instances = M.Datepicker.init(elems, {});
+          });
     }
 
     render() {
@@ -158,7 +162,7 @@ class AddJobs extends Component {
                         </div>
                         <div className="input-field col s6">
                             <i className="material-icons prefix">access_alarm</i>
-                            <input id="schedule" type="date" 
+                            <input id="schedule" type="date"
                                 name="schedule" value={this.state.schedule} onChange={this.handleChange}
                                 autoComplete="off" /> 
                             <label htmlFor="schedule"></label>

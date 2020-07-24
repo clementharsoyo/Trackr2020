@@ -6,7 +6,9 @@ class EditEmail extends Component {
     
     state = {
         newemail:'',
-        errors:[]
+        count: 15,
+        isButtonDisabled: false,
+        errors:[],
     };
 
     handleChange = (e) => {
@@ -21,6 +23,11 @@ class EditEmail extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
+        this.setState({
+            isButtonDisabled: true,
+            count: 15
+          })
+        setTimeout(this.disableButton, 15000)
         axios.defaults.headers.common["authorization"] = localStorage.getItem('authtoken')
         axios.get("http://localhost:5000/api/users/sendVerificationEmail?email=" + this.state.newemail)
         .then (res => {
@@ -36,14 +43,27 @@ class EditEmail extends Component {
             })
         })
     }
+
+    componentDidMount() {
+        setInterval(() => {
+          this.setState({
+            count: this.state.count - 1
+          })}, 1000)
+    }
     
     render() {
+        let sendButton;
+        if (this.state.isButtonDisabled) {
+            sendButton = <button className="btn-large grey">Wait {this.state.count}</button>
+        } else {
+            sendButton = <button className="btn-large grey" onClick={this.handleSubmit}>Send Verification Email</button>
+        }
         return(
             <div class="iris row" style={{marginBottom: 0}}>
                 <div className="container">
                     <div className="col s12 l6 push-l3">
                         <div className="card">
-                            <div className="card-action blue-grey lighten-5 center">
+                            <div className="card-action blue-grey white-text center">
                                 <h3>Change Email</h3>
                             </div>
                             <div className="card-content">
@@ -54,7 +74,7 @@ class EditEmail extends Component {
                                     <p style={{color: "black"}}>{ this.state.errors.email } </p>
                                 </div>
                                 <div className="form-field center-align">
-                                    <button className="btn-large grey" onClick={this.handleSubmit}>Save</button>
+                                   {sendButton}
                                 </div>
                             </div>
                         </div>
