@@ -43,7 +43,7 @@ class Metrics extends Component {
                 </li>
             )
         })
-        if (weeklyJobs[0] !== true) {
+        if (!this.state.jobs[0]) {
             weeklyJobs.push(
                 <li class="collection-item avatar">
                    <span class="title">Nothing to worry about!</span> 

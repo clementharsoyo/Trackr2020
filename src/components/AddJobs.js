@@ -3,6 +3,8 @@ import axios from 'axios';
 import "./Thirdboard/Thirdboard.css"
 import M from "materialize-css"
 import { GoogleComponent } from 'react-google-location'
+import moment from 'moment';
+import TimePicker from 'rc-time-picker';
 
 class AddJobs extends Component {
     state = {
@@ -51,6 +53,30 @@ class AddJobs extends Component {
         }
     }
 
+    formatDate = (date) => {
+        const months = {
+            Jan: "01",
+            Feb: "02",
+            Mar: "03",
+            Apr: "04",
+            May: "05",
+            Jun: "06",
+            Jul: "07",
+            Aug: "08",
+            Sep: "09",
+            Oct: "10",
+            Nov: "11",
+            Dec: "12"
+        }
+    
+        const day = date[5] === "," ? "0" + date[4] : date.slice(4, 6);
+        const month = months[date.slice(0, 3)];
+        const year = day[0] === "0" ? date.substring(7) : date.substring(8);
+        const h = "-";
+    
+        return year + h + month + h + day;
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
         axios.get("http://localhost:5000/api/users/logo/" + this.state.company)
@@ -96,21 +122,25 @@ class AddJobs extends Component {
 
     componentDidMount() {
         M.AutoInit()
-        document.addEventListener('DOMContentLoaded', function() {
+        /*document.addEventListener('DOMContentLoaded', function() {
             var elems = document.querySelectorAll('.datepicker');
-            var instances = M.Datepicker.init(elems, {});
-          });
-    }
+            var instances = M.Datepicker.init(elems, {})
+        });*/
+        window.$(".datepicker-done").click(() => {
+            var datepickerValue = window.$("#schedule").val();  // date-input it's 'id' on datepicker input
+            this.setState({ schedule: this.formatDate(datepickerValue), time: '00:00' });
+            console.log(this.state.schedule)
+        });
+      }
 
     render() {
         let timeInput;
         if (this.state.schedule) {
             timeInput = 
             <div className="input-field col s6">
-                <i className="material-icons prefix"></i>
-                <input id="time" type="time" 
+                <input id="time" type="time"
                     name="time" value={this.state.time} onChange={this.handleChange}
-                    autoComplete="off" /> 
+                    autoComplete="off" />
                 <label htmlFor="time"></label>
             </div>
         }
@@ -162,11 +192,20 @@ class AddJobs extends Component {
                         </div>
                         <div className="input-field col s6">
                             <i className="material-icons prefix">access_alarm</i>
-                            <input id="schedule" type="date"
-                                name="schedule" value={this.state.schedule} onChange={this.handleChange}
+                            <input id="schedule" type="text" className="datepicker dateset"
+                                name="schedule" value={this.state.schedule}
+                                onChange={this.handleChange}
                                 autoComplete="off" /> 
                             <label htmlFor="schedule"></label>
                         </div>
+                        {/*<div className="input-field col s6">
+                            <i className="material-icons prefix">access_alarm</i>
+                            <DatePicker
+                            dateFormat="yyyy-MM-dd"
+                            selected={this.state.schedule}
+                            onChange={this.handleChangeDate}
+                            />
+                        </div>*/}
                         {timeInput}
                     </div>
                     <button class="btn waves-effect waves-light" type="submit" name="action">Add

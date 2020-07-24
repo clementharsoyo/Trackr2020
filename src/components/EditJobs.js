@@ -54,10 +54,15 @@ class EditJobs extends Component {
         e.preventDefault();
         axios.get("http://localhost:5000/api/users/logo/" + this.state.company)
             .then(res => {
+                console.log(res.data.logo)
                 if (res.data.logo) {
                     this.setState({
                         logo: res.data.logo + "?size=45"
-                    })}
+                })} else {
+                    this.setState({
+                        logo: ''
+                    })
+                }
                 const editedJob = {
                     company: this.state.company,
                     role: this.state.role,
