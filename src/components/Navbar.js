@@ -39,7 +39,7 @@ class Navbar extends Component {
 
     let linkedInID;
     if (this.state.linkedInID) {
-      linkedInID = <li><a href="#"><i className="material-icons tiny right">check</i>LinkedIn</a></li>
+      linkedInID = <li><a><i className="material-icons tiny right">check</i>LinkedIn</a></li>
     } else {
       linkedInID = <li><a href="/SyncLinkedIn">LinkedIn</a></li>
     }

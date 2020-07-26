@@ -20,18 +20,34 @@ class ForgotPassword extends Component {
         })
     }
 
+    disableButton = () => {
+        this.setState({
+          isButtonDisabled: !this.state.isButtonDisabled
+        })
+        console.log("changedState")
+      }
+
     handleSubmit = (e) => {
         e.preventDefault()
-        this.setState({
-            isButtonDisabled: true,
-            count: 15
-          })
-        setTimeout(this.disableButton, 15000)
         axios.get("http://localhost:5000/api/users/sendPasswordRecoveryEmail/" + this.state.username)
-        .catch(err => {
+        .then(res => {
             this.setState({
-                errors: err.response.data
-            })
+                isButtonDisabled: true,
+                count: 15
+              })
+            setTimeout(this.disableButton, 15000)
+        })
+        .catch(err => {
+            if (this.state.username) {
+                this.setState({
+                    errors: err.response.data
+                })
+            } else {
+                console.log(err)
+                this.setState({
+                    errors: {empty: "This field is required"}
+                })
+            }
         })
     }
 
@@ -45,16 +61,16 @@ class ForgotPassword extends Component {
     render() {
         let sendButton;
         if (this.state.isButtonDisabled) {
-            sendButton = <button className="btn-large red">Wait {this.state.count}</button>
+            sendButton = <button className="btn-large grey">Wait {this.state.count}</button>
         } else {
-            sendButton = <button className="btn-large red" onClick={this.handleSubmit}>Send Recovery Email</button>
+            sendButton = <button className="btn-large grey" onClick={this.handleSubmit}>Send Recovery Email</button>
         }
         return(
             <div className="bgimage" style={{marginBottom: 0}}>
             <div className="row login" style={{marginBottom: 0}}>
                 <div className="col s12 l4 offset-l4">
                     <div className="card">
-                        <div className="card-action red white-text">
+                        <div className="card-action blue-grey white-text">
                             <h3>No Worries!</h3>
                         </div>
                         <div className="card-content">
@@ -62,8 +78,10 @@ class ForgotPassword extends Component {
                                 <label for="username">Please input your username / email</label>
                                 <input type="text" id="username" name="username" autoComplete="off" 
                                 value={this.state.username} onChange={this.handleChange} />
-                                <p style={{color: "black"}}>{ this.state.errors.username} </p>
-                                <p style={{color: "black"}}>{ this.state.errors.email} </p>
+                                <p style={{color: "#a82424"}}> { this.state.errors.email} </p>
+                                <p style={{color: "#a82424"}}> { this.state.errors.username} </p>
+                                <p style={{color: "#a82424"}}> { this.state.errors.error} </p>
+                                <p style={{color: "#a82424"}}> { this.state.errors.empty} </p>
                             </div>
                             <div className="form-field center-align">
                                 {sendButton}

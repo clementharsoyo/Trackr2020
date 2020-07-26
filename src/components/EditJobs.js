@@ -73,11 +73,43 @@ class EditJobs extends Component {
                     this.setState({
                         logo: res.data.logo + "?size=45"
                 })} 
+                const editedJob = {
+                    company: this.state.company,
+                    role: this.state.role,
+                    oldStatus: this.state.oldStatus,
+                    status: this.state.status,
+                    interviewDate: this.state.schedule + "T" + this.state.time,
+                    place: this.state.place,
+                    coordinates: this.state.coordinates,
+                    id: this.state.id,
+                    logo: this.state.logo
+                }
+                console.log(editedJob)
+                const newArr = this.props.editExistingJob(editedJob) 
+                const newObj = {
+                    updated: true,
+                    updatedJob: editedJob,
+                    jobs: newArr
+                }
+                this.putNewObj(newObj)
+                    .then(res => {
+                        if (res) {
+                            console.log("run")
+                            this.props.closeEditForm()
+                        }
+                })
             })
             .catch(err => {
-                console.log(err)
+                this.setState({
+                    errors: {company: "Company field is required"}
+                })
+                if (this.state.role === "") {
+                    this.setState({
+                        errors: {company: "Company field is required", role: "Role field is required"}
+                    })
+                }
             })
-            .finally(() => {
+            /*.finally(() => {
                 const editedJob = {
                     company: this.state.company,
                     role: this.state.role,
@@ -114,7 +146,6 @@ class EditJobs extends Component {
                     console.log(this.state)
                 })
                 this.props.closeEditForm()*/
-            })
     }
 
     componentDidMount() {

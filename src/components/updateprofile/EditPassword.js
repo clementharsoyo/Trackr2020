@@ -55,13 +55,13 @@ class EditPassword extends Component {
                                     <label for="oldpassword">Old Password</label>
                                     <input type="text" id="oldpassword" name="oldpassword" autoComplete="off" 
                                         value={this.state.oldpassowrd} onChange={this.handleChange} />
-                                    <p style={{color: "black"}}>{ this.state.errors.oldPassword }</p>
+                                    <p style={{color: "#a82424"}}> { this.state.errors.oldPassword }</p>
                                 </div>
                                 <div className="form-field">
                                     <label for="newpassword">New Password</label>
                                     <input type="text" id="newpassword" name="newpassword" autoComplete="off" 
                                         value={this.state.newpassword} onChange={this.handleChange} />
-                                    <p style={{color: "black"}}>{ this.state.errors.newPassword }</p>
+                                    <p style={{color: "#a82424"}}> { this.state.errors.newPassword }</p>
                                 </div>
                                 <div className="form-field center-align">
                                     <button className="btn-large grey" onClick={this.handleSubmit}>Save</button>

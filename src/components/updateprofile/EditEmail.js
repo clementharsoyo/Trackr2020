@@ -21,16 +21,23 @@ class EditEmail extends Component {
         })
     }
 
+    disableButton = () => {
+        this.setState({
+          isButtonDisabled: !this.state.isButtonDisabled
+        })
+        console.log("changedState")
+      }
+
     handleSubmit = (e) => {
         e.preventDefault()
-        this.setState({
-            isButtonDisabled: true,
-            count: 15
-          })
-        setTimeout(this.disableButton, 15000)
         axios.defaults.headers.common["authorization"] = localStorage.getItem('authtoken')
         axios.get("http://localhost:5000/api/users/sendVerificationEmail?email=" + this.state.newemail)
         .then (res => {
+            this.setState({
+                isButtonDisabled: true,
+                count: 15
+              })
+            setTimeout(this.disableButton, 15000)
             console.log("Success")
             this.setState({
                 successMessage: "Successfully change email"
@@ -71,7 +78,7 @@ class EditEmail extends Component {
                                     <label for="newemail">New Email</label>
                                     <input type="text" id="newemail" name="newemail" autoComplete="off" 
                                         value={this.state.newemail} onChange={this.handleChange} />
-                                    <p style={{color: "black"}}>{ this.state.errors.email } </p>
+                                    <p style={{color: "#a82424"}}> { this.state.errors.email } </p>
                                 </div>
                                 <div className="form-field center-align">
                                    {sendButton}

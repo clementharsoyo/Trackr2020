@@ -58,7 +58,7 @@ class EditUsername extends Component {
                                     <label htmlFor="username">Choose your new username</label>
                                     <input type="text" id="username" name="username" autoComplete="off" 
                                         value={this.state.username} onChange={this.handleChange} />
-                                    <p style={{color: "black"}}>{ this.state.errors.username } </p>                                    <p style={{color: "black"}}>{ this.state.errors.error } </p>
+                                    <p style={{color: "#a82424"}}> { this.state.errors.username } </p>                                    <p style={{color: "black"}}>{ this.state.errors.error } </p>
                                 </div>
                                 <div className="form-field center-align">
                                     <button className="btn-large grey" onClick={this.handleSubmit}>Save</button>

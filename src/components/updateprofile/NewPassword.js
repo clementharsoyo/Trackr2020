@@ -57,7 +57,7 @@ class NewPassword extends Component {
                                     <label for="newpassword">Please input new password</label>
                                     <input type="text" id="newpassword" name="newpassword" autoComplete="off" 
                                         value={this.state.newpassword} onChange={this.handleChange} />
-                                    <p style={{color: "black"}}>{ this.state.errors.newPassword }</p>
+                                    <p style={{color: "#a82424"}}> { this.state.errors.newPassword }</p>
                                 </div>
                                 <div className="form-field center-align">
                                     <button className="btn-large grey" onClick={this.handleSubmit}>Save</button>
