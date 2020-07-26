@@ -92,6 +92,7 @@ class Thirdboard extends Component {
         this.setState({
           jobs: newJobsArray
         })
+        console.log("I runnnnnn")
         return newJobsArray
       }
 

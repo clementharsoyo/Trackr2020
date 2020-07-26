@@ -26,7 +26,7 @@ class Thirdcard extends Component {
             if (this.props.job.interviewDate !== "T") {
                 schedule = <p className="jobcard-content"> Apply by: {this.props.job.interviewDate.split("T")[0]} [{this.props.job.interviewDate.split("T")[1]}] </p> 
             } else {
-                schedule = <p className="jobcard-content"> Apply by: Date is empty </p>
+                schedule = <p className="jobcard-content"></p>
             }
             let logourl;
             if (this.props.job.logo) {
@@ -34,7 +34,7 @@ class Thirdcard extends Component {
             }
         return(
         <div key={this.props.job.id}
-        draggable
+        draggable={!this.state.editForm}
         onDragStart={(e) => this.onDragStart(e, this.props.job.id)}
         className="jobcard-toApply">
         <p className="jobcard-title"> {logourl} {this.props.job.company} </p>
@@ -52,11 +52,11 @@ class Thirdcard extends Component {
             if (this.props.job.interviewDate !== "T") {
                 schedule = <p className="jobcard-content"> Applied on: {this.props.job.interviewDate.split("T")[0]} [{this.props.job.interviewDate.split("T")[1]}] </p> 
             } else {
-                schedule = <p className="jobcard-content"> Applied on: Date is empty </p>
+                schedule = <p className="jobcard-content"></p>
             }
             return(
                 <div key={this.props.job.id}
-                draggable
+                draggable={!this.state.editForm}
                 onDragStart={(e) => this.onDragStart(e, this.props.job.id)}
                 className="jobcard-applied">
                 <p className="jobcard-title"> <img src={this.props.job.logo} style={{float: "right", borderRadius: "50%"}} /> {this.props.job.company} </p>
@@ -74,11 +74,11 @@ class Thirdcard extends Component {
             if (this.props.job.interviewDate !== "T") {
                 schedule = <p className="jobcard-content"> Interview on: {this.props.job.interviewDate.split("T")[0]} [{this.props.job.interviewDate.split("T")[1]}] </p> 
             } else {
-                schedule = <p className="jobcard-content"> Interview on: Date is empty </p>
+                schedule = <p className="jobcard-content"></p>
             }
             return(
                 <div key={this.props.job.id}
-                draggable
+                draggable={!this.state.editForm}
                 onDragStart={(e) => this.onDragStart(e, this.props.job.id)}
                 className="jobcard-interview">
                 <p className="jobcard-title"> <img src={this.props.job.logo} style={{float: "right", borderRadius: "50%"}} /> {this.props.job.company} </p>
@@ -96,11 +96,11 @@ class Thirdcard extends Component {
             if (this.props.job.interviewDate !== "T") {
                 schedule = <p className="jobcard-content"> Accept offer by: {this.props.job.interviewDate.split("T")[0]} [{this.props.job.interviewDate.split("T")[1]}] </p> 
             } else {
-                schedule = <p className="jobcard-content"> Accept offer by: Date is empty </p>
+                schedule = <p className="jobcard-content"></p>
             }
             return(
                 <div key={this.props.job.id}
-                draggable
+                draggable={!this.state.editForm}
                 onDragStart={(e) => this.onDragStart(e, this.props.job.id)}
                 className="jobcard-offer">
                 <p className="jobcard-title"> <img src={this.props.job.logo} style={{float: "right", borderRadius: "50%"}} /> {this.props.job.company} </p>

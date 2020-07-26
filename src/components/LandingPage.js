@@ -77,7 +77,7 @@ class LandingPage extends Component {
                     </div>
                 </div>
 
-                <div className="container">
+                {/*<div className="container">
                     <div className="row">
                         <h1 className="center"> Meet our team </h1>
                         <div class="row">
@@ -115,7 +115,7 @@ class LandingPage extends Component {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>*/}
             </div>
         )
     }

@@ -3,7 +3,6 @@ import axios from 'axios';
 import "./Thirdboard/Thirdboard.css"
 import M from "materialize-css"
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from "react-places-autocomplete";
-import { verify } from 'jsonwebtoken';
 
 
 class EditJobs extends Component {
@@ -17,7 +16,8 @@ class EditJobs extends Component {
         place: this.props.job.place,
         coordinates: this.props.job.coordinates,
         id: this.props.job.id,
-        logo: this.props.job.logo
+        logo: '',
+        errors: []
     };
 
     handleChange = (e) => {
@@ -50,19 +50,34 @@ class EditJobs extends Component {
         })
     };
 
+    putNewObj = (newObj) => {
+        return axios
+                .put("http://localhost:5000/api/users/jobs", newObj)
+                .then(res => {
+                    return res.data
+                    }
+                )
+                .catch(err => { 
+                    this.setState({
+                        errors: err.response.data
+                    }) 
+                    console.log(err.response.data)
+                })
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
         axios.get("http://localhost:5000/api/users/logo/" + this.state.company)
             .then(res => {
-                console.log(res.data.logo)
                 if (res.data.logo) {
                     this.setState({
                         logo: res.data.logo + "?size=45"
-                })} else {
-                    this.setState({
-                        logo: ''
-                    })
-                }
+                })} 
+            })
+            .catch(err => {
+                console.log(err)
+            })
+            .finally(() => {
                 const editedJob = {
                     company: this.state.company,
                     role: this.state.role,
@@ -81,21 +96,24 @@ class EditJobs extends Component {
                     updatedJob: editedJob,
                     jobs: newArr
                 }
-                axios.put("http://localhost:5000/api/users/jobs", newObj)
-                .catch(err => { console.log(err.response.data)})
-                this.props.closeEditForm()
-                this.setState({
-                    company: '',
-                    role: '',
-                    oldStatus: '',
-                    status: '',
-                    schedule: '',
-                    time: '',
-                    place: '',
-                    coordinates: [],
-                    id: '',
-                    logo: ''
+                this.putNewObj(newObj)
+                    .then(res => {
+                        if (res) {
+                            console.log("run")
+                            this.props.closeEditForm()
+                        }
+                    })
+                /*axios.put("http://localhost:5000/api/users/jobs", newObj)
+                .then(res => {
+                    console.log(res)
                 })
+                .catch(err => {
+                    this.setState({
+                        errors: err.response.data
+                    })
+                    console.log(this.state)
+                })
+                this.props.closeEditForm()*/
             })
     }
 
@@ -122,13 +140,14 @@ class EditJobs extends Component {
             <div className="row">
                 <form className="col s12" onSubmit={this.handleSubmit}>
                     <div className="row">
-                        <div className="input-field col s6">
+                        <div className="input-field col s12 l6">
                             <i className="material-icons prefix">work</i>
                             <input id="company" type="text" className="validate"
                                 name="company" value={this.state.company} onChange={this.handleChange} autoComplete="off"/>
                             <label htmlFor="company"></label>
+                            <p style={{color: "#a82424"}}>{ this.state.errors.company } </p>
                         </div>
-                        <div className="input-field col s6">
+                        <div className="input-field col s12 l6">
                             <i className="material-icons prefix">location_on</i>
                             <PlacesAutocomplete
                                 value={this.state.place}
@@ -174,6 +193,7 @@ class EditJobs extends Component {
                             <input id="role" type="text" className="validate" 
                                 name="role" value={this.state.role} onChange={this.handleChange} autoComplete="off"/>
                             <label htmlFor="role"></label>
+                            <p style={{color: "#a82424"}}>{ this.state.errors.role } </p>
                         </div>
                         <div className="input-field col s12">
                             <i className="material-icons prefix">sms</i>
@@ -186,6 +206,7 @@ class EditJobs extends Component {
                                 <option value="offer">Offer</option>
                             </select>
                             <label htmlFor="status"></label>
+                            <p style={{color: "#a82424"}}>{ this.state.errors.status } </p>
                         </div>
                         <div className="input-field col s6">
                             <i className="material-icons prefix">access_alarm</i>
@@ -196,9 +217,9 @@ class EditJobs extends Component {
                         </div>
                         {timeInput}
                     </div>
-                    <button class="btn waves-effect waves-light" type="submit" name="action">Edit
+                    <button class="btn teal" type="submit" name="action">Edit
                             <i class="material-icons right">send</i></button>
-                    <button onClick={this.props.closeEditForm} className="right btn-flat">x</button>
+                    <button onClick={this.props.closeEditForm} className="right small btn grey">x</button>
                 </form>
             </div>
             </div>

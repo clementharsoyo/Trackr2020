@@ -3,8 +3,7 @@ import axios from 'axios';
 import "./Thirdboard/Thirdboard.css"
 import M from "materialize-css"
 import { GoogleComponent } from 'react-google-location'
-import moment from 'moment';
-import TimePicker from 'rc-time-picker';
+import { DatePicker } from "react-materialize";
 
 class AddJobs extends Component {
     state = {
@@ -23,7 +22,6 @@ class AddJobs extends Component {
         return axios
                 .put("http://localhost:5000/api/users/jobs", newObj)
                 .then(res => {
-                    console.log(res.data)
                     return res.data
                     }
                 )
@@ -51,6 +49,13 @@ class AddJobs extends Component {
         })
 
         }
+    }
+
+    handleDate = () => {
+        console.log("Picked")
+        this.setState({
+            schedule: this.state.schedule.target.value
+        })
     }
 
     formatDate = (date) => {
@@ -82,9 +87,17 @@ class AddJobs extends Component {
         axios.get("http://localhost:5000/api/users/logo/" + this.state.company)
             .then(res => {
                 if (res.data.logo) {
+                    this.setState({
+                        logo: res.data.logo + "?size=45"
+                    })
+                }
+            })
+            .catch(err => {
                 this.setState({
-                    logo: res.data.logo + "?size=45"
-                })}
+                    errors: err.response.data
+                })
+            })
+            .finally(() => {
                 const newJob = {
                     company: this.state.company,
                     role: this.state.role,
@@ -122,14 +135,11 @@ class AddJobs extends Component {
 
     componentDidMount() {
         M.AutoInit()
-        /*document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function() {
             var elems = document.querySelectorAll('.datepicker');
-            var instances = M.Datepicker.init(elems, {})
-        });*/
-        window.$(".datepicker-done").click(() => {
-            var datepickerValue = window.$("#schedule").val();  // date-input it's 'id' on datepicker input
-            this.setState({ schedule: this.formatDate(datepickerValue), time: '00:00' });
-            console.log(this.state.schedule)
+            M.Datepicker.init(elems, {
+                format: "mm/dd/yyyy",
+            })
         });
       }
 
@@ -144,6 +154,7 @@ class AddJobs extends Component {
                 <label htmlFor="time"></label>
             </div>
         }
+
         const API_KEY = "AIzaSyD0VjbJ2NjXqxlmkLxO6nlmvZcH9iL4p70"
         return (
             <div className='popup'>
@@ -191,8 +202,8 @@ class AddJobs extends Component {
                             <p style={{color: "#a82424"}}>{ this.state.errors.status } </p>
                         </div>
                         <div className="input-field col s6">
-                            <i className="material-icons prefix">access_alarm</i>
-                            <input id="schedule" type="text" className="datepicker dateset"
+                            <i className="material-icons prefix">date_range</i>
+                            <input id="schedule" type="date"
                                 name="schedule" value={this.state.schedule}
                                 onChange={this.handleChange}
                                 autoComplete="off" /> 
@@ -208,9 +219,9 @@ class AddJobs extends Component {
                         </div>*/}
                         {timeInput}
                     </div>
-                    <button class="btn waves-effect waves-light" type="submit" name="action">Add
+                    <button class="btn teal" type="submit" name="action">Add
                             <i class="material-icons right">send</i></button>
-                    <button onClick={this.props.closePopup} className="right btn-flat">x</button>
+                    <button onClick={this.props.closePopup} className="right small btn grey">x</button>
                 </form>
             </div>
             </div>
