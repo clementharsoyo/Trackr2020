@@ -121,7 +121,7 @@ class SignUpForm extends Component {
 
                     {/* Sign Up Button */}
                     <div className="FormField">
-                        <button className="FormField__Button waves-effect waves-light mr-20" type="Submit">Sign Up</button>
+                        <button className="FormField__Button mr-20" type="Submit">Sign Up</button>
                         <Link exact to="/login" className="FormField__Link">Have an account?</Link>
                     </div>
                 </form>

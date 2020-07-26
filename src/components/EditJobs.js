@@ -164,7 +164,6 @@ class EditJobs extends Component {
                 <label htmlFor="time"></label>
             </div>
         }
-        const API_KEY = "AIzaSyD0VjbJ2NjXqxlmkLxO6nlmvZcH9iL4p70"
         return (
             <div className='popup'>
             <div className='popup_inner'>

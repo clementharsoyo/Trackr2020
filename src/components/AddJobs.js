@@ -15,7 +15,8 @@ class AddJobs extends Component {
         logo: '',
         place: '',
         coordinates: [],
-        errors: []
+        errors: [],
+        key: ''
     };
 
     putNewObj = (newObj) => {
@@ -141,6 +142,9 @@ class AddJobs extends Component {
                 format: "mm/dd/yyyy",
             })
         });
+        axios.get(axios.get("http://localhost:5000/api/users/googleAPIKey")
+        .then(res => {
+            this.setState({key: res.data.API_Key})}))
       }
 
     render() {
@@ -154,8 +158,6 @@ class AddJobs extends Component {
                 <label htmlFor="time"></label>
             </div>
         }
-
-        const API_KEY = "AIzaSyD0VjbJ2NjXqxlmkLxO6nlmvZcH9iL4p70"
         return (
             <div className='popup'>
             <div className='popup_inner'>
@@ -172,7 +174,7 @@ class AddJobs extends Component {
                         <div className="input-field col s6">
                             <i className="material-icons prefix">location_on</i>
                             <GoogleComponent
-                            apiKey={API_KEY}
+                            apiKey={this.state.key}
                             language={'en'}
                             coordinates={true}
                             locationBoxStyle={'custom-style'}

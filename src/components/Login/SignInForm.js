@@ -118,8 +118,8 @@ class SignInForm extends Component {
 
                     {/* Sign In Button */}
                     <div className="FormField">
-                        <button className="FormField__Button waves-effect mr-20" type="Submit">Sign In</button>
-                        <Link to="/linkedin"><button className="FormField__Button2 waves-effect mr-20">Sign In with LinkedIn</button></Link>
+                        <button className="FormField__Button mr-20" type="Submit">Sign In</button>
+                        <Link to="/linkedin"><button className="FormField__Button2 mr-20">Sign In with LinkedIn</button></Link>
                         {/*<Link to="/login/signup" className="FormField__Link">New to Trackr?</Link>*/}
                         
                     </div>

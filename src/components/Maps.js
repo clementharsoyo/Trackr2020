@@ -5,7 +5,8 @@ import axios from 'axios'
 class Maps extends Component {
 
     state = {
-        jobs: []
+        jobs: [],
+        key: ''
     }
 
     componentDidMount() {
@@ -19,14 +20,16 @@ class Maps extends Component {
         })
         .catch(error => {
             console.log(error)
-            if (error.status === 401) {
+            if (error.response.status === 401) {
                 this.props.history.push("/login")
             }
         })
+        axios.get("http://localhost:5000/api/users/googleAPIKey")
+        .then(res => {
+            this.setState({key: res.data.API_Key})})
     } 
     
     render() {
-        const API_KEY = "AIzaSyD0VjbJ2NjXqxlmkLxO6nlmvZcH9iL4p70"
         let markers = []
         this.state.jobs.forEach(job => {
             if (job.place) {
@@ -40,7 +43,7 @@ class Maps extends Component {
         return (
             <div style={{ height: '100vh', width: '100%' }}>
                 <GoogleMapReact
-                    bootstrapURLKeys={{ key: "AIzaSyD0VjbJ2NjXqxlmkLxO6nlmvZcH9iL4p70" }}
+                    bootstrapURLKeys={{ key: this.state.key}}
                     defaultCenter={{lat: 1.290270, lng: 103.851959}}
                     defaultZoom={10}
                 >
