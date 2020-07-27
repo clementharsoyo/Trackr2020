@@ -1,12 +1,13 @@
 import React, {Component} from 'react'
 import GoogleMapReact from 'google-map-react'
 import axios from 'axios'
+import Clement from './lpimage/clement2.png'
 
 class Maps extends Component {
 
     state = {
         jobs: [],
-        key: ''
+        key: '',
     }
 
     componentDidMount() {
@@ -20,7 +21,7 @@ class Maps extends Component {
         })
         .catch(error => {
             console.log(error)
-            if (error.response.status === 401) {
+            if (error.status === 401) {
                 this.props.history.push("/login")
             }
         })

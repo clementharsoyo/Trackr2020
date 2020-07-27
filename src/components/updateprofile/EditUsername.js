@@ -73,7 +73,7 @@ class EditUsername extends Component {
                 <div className="container">
                     <div className="col s12 l6 push-l3">
                         <div className="card">
-                            <div className="card-action blue-grey lighten-5 white-text">
+                            <div className="card-action blue-grey lighten-5 black-text">
                                 <h3>Username Changed</h3>
                             </div>
                         </div>
