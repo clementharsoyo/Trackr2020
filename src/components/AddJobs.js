@@ -99,6 +99,35 @@ class AddJobs extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+        if (this.state.company !== '' && this.state.role === '' && this.state.status === '') {
+            this.setState({
+                errors: {role: "Role field is required", status: "Status field is required"}
+            })
+        } else if (this.state.company === '' && this.state.role !== '' && this.state.status === '') {
+            this.setState({
+                errors: {company: "Company field is required", status: "Status field is required"}
+            })
+        } else if (this.state.company === '' && this.state.role === '' && this.state.status !== '') {
+            this.setState({
+                errors: {company: "Company field is required", role: "Role field is required"}
+            })
+        } else if (this.state.company === '' && this.state.role !== '' && this.state.status !== '') {
+            this.setState({
+                errors: {company: "Company field is required"}
+            })
+        } else if (this.state.company !== '' && this.state.role === '' && this.state.status !== '') {
+            this.setState({
+                errors: {role: "Role field is required"}
+            })
+        } else if (this.state.company !== '' && this.state.role !== '' && this.state.status === '') {
+            this.setState({
+                errors: {status: "Status field is required"}
+            })
+        } else if (this.state.company !== '' && this.state.role === '' && this.state.status === '') {
+            this.setState({
+                errors: {company: "Company field is required", role: "Role field is required", status: "Status field is required"}
+            })
+        } else {
         axios.get("http://localhost:5000/api/users/logo/" + this.state.company)
             .then(res => {
                 if (res.data.logo) {
@@ -146,7 +175,9 @@ class AddJobs extends Component {
                     logo: ''
                 })
             })
+        }
     }
+
 
     componentDidMount() {
         M.AutoInit()

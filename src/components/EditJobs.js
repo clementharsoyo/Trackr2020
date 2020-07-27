@@ -67,6 +67,35 @@ class EditJobs extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+        if (this.state.company !== '' && this.state.role === '' && this.state.status === '') {
+            this.setState({
+                errors: {role: "Role field is required", status: "Status field is required"}
+            })
+        } else if (this.state.company === '' && this.state.role !== '' && this.state.status === '') {
+            this.setState({
+                errors: {company: "Company field is required", status: "Status field is required"}
+            })
+        } else if (this.state.company === '' && this.state.role === '' && this.state.status !== '') {
+            this.setState({
+                errors: {company: "Company field is required", role: "Role field is required"}
+            })
+        } else if (this.state.company === '' && this.state.role !== '' && this.state.status !== '') {
+            this.setState({
+                errors: {company: "Company field is required"}
+            })
+        } else if (this.state.company !== '' && this.state.role === '' && this.state.status !== '') {
+            this.setState({
+                errors: {role: "Role field is required"}
+            })
+        } else if (this.state.company !== '' && this.state.role !== '' && this.state.status === '') {
+            this.setState({
+                errors: {status: "Status field is required"}
+            })
+        } else if (this.state.company !== '' && this.state.role === '' && this.state.status === '') {
+            this.setState({
+                errors: {company: "Company field is required", role: "Role field is required", status: "Status field is required"}
+            })
+        } else {
         axios.get("http://localhost:5000/api/users/logo/" + this.state.company)
             .then(res => {
                 if (res.data.logo) {
@@ -109,43 +138,7 @@ class EditJobs extends Component {
                     })
                 }
             })
-            /*.finally(() => {
-                const editedJob = {
-                    company: this.state.company,
-                    role: this.state.role,
-                    oldStatus: this.state.oldStatus,
-                    status: this.state.status,
-                    interviewDate: this.state.schedule + "T" + this.state.time,
-                    place: this.state.place,
-                    coordinates: this.state.coordinates,
-                    id: this.state.id,
-                    logo: this.state.logo
-                }
-                console.log(editedJob)
-                const newArr = this.props.editExistingJob(editedJob) 
-                const newObj = {
-                    updated: true,
-                    updatedJob: editedJob,
-                    jobs: newArr
-                }
-                this.putNewObj(newObj)
-                    .then(res => {
-                        if (res) {
-                            console.log("run")
-                            this.props.closeEditForm()
-                        }
-                    })
-                /*axios.put("http://localhost:5000/api/users/jobs", newObj)
-                .then(res => {
-                    console.log(res)
-                })
-                .catch(err => {
-                    this.setState({
-                        errors: err.response.data
-                    })
-                    console.log(this.state)
-                })
-                this.props.closeEditForm()*/
+        }
     }
 
     componentDidMount() {

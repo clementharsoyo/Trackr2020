@@ -149,7 +149,7 @@ class Thirdboard extends Component {
             applied: [],
             interview: [],
             offer: []
-        }
+        } 
 
         console.log(this.state.jobs)
 
